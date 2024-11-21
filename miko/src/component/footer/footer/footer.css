@@ -1,0 +1,64 @@
+.footer{
+    height: 60vh;
+    width: 100%;
+    background-color: seashell;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    padding-left: 0%;
+    list-style: none;
+}
+.shop{ list-style: none;
+gap: 20px;
+font-style: normal;
+padding: 20px;}
+.newsletter{
+    padding: 20px;
+}
+*{
+    margin: 0%;
+    padding: 0%;
+}
+.shop li{
+   margin-bottom: 10px;
+   font-weight: bold;
+}
+.lastlabel{
+    position: absolute;
+    top: 50vh;
+    left: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    font-weight: 500;
+  
+}
+#l1{
+    background-color: seashell;
+
+}
+.lastlabel2{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    width: 100%;
+    position: relative;
+    font-weight: 500;
+}
+.last{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+.we{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    position: relative;
+    width: 100%;
+
+}
+.pay{
+    position: absolute;
+    right: -100vh;
+}
