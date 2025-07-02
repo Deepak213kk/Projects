@@ -1,0 +1,20 @@
+.Yheadmain{
+    position: relative;
+    top: 17vh;
+    margin-bottom: 20px;
+}
+.Yhead2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15vw;
+    padding: 30px;
+    margin: 30px;
+}
+.Shareicon{
+    display: flex;
+        column-gap: 20px;
+}
+.Yhead2p{
+    max-width: 40vw;
+}

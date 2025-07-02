@@ -1,0 +1,345 @@
+
+/* Underline Class for Links or Text */
+.underline {
+    border-bottom: 1px solid gray;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.underline:hover {
+    color: darkgreen;
+    font-weight: bold;
+}
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: c;
+}
+/* Header Section */
+.haider {
+    margin-top: 8vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+/* Filter Button */
+.filter-button-container {
+    margin-left: auto;
+}
+
+.filter-toggle-button {
+    padding: 8px 12px;
+    background-color: #e5e7eb;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition:  0.2s;
+}
+
+.filter-toggle-button:hover {
+    background-color: #d1d5db;
+}
+
+/* Basket (Filters) Section */
+.basket {
+    position: fixed;
+    left: 10px;
+    top: 15%;
+    width: 250px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.basket:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Filters Styling */
+.filter-item h6 {
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+.filter-item h6:hover {
+    color: darkgreen;
+}
+.filter-options label {
+    /* display: block; */
+    font-size: 14px;
+    /* margin-bottom: 5px; */
+}
+
+/* Main Content Section */
+.main {
+    padding: 10px;
+    width: calc(100% - 270px);
+    margin-left: 270px;
+    padding: 20px;
+    
+    min-height: 100vh;
+    box-sizing: border-box;
+    
+    margin-top: 9vh;
+    
+}
+.secondmain{
+    position: relative;
+    top: 10vh;
+}
+/* Heading and Description */
+.shophead {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.shophead h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.para {
+    margin-top: 10px;
+    text-align: justify;
+    font-size: 16px;
+    color: #4b5563;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
+}
+
+/* Product Grid */
+.box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: seashell;
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 products per row */
+    gap: 20px; /* Space between products */
+    padding: 20px;
+  }
+  
+  .grid-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .grid-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .bestseller {
+    background-color: yellow;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .rating {
+    font-size: 16px;
+    color: #ff9800;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr); /* 3 products per row on tablets */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 products per row on mobile */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: repeat(1, 1fr); /* 1 product per row on small screens */
+    }
+  }
+  .header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .header h1 {
+    font-size: 40px;
+    font-weight: bold;
+  }
+  
+  .header p {
+    font-size: 20px;
+    color: #555;
+    width: 40vw;
+  }
+
+/* Product Card */
+.grid-item {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.grid-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.grid-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.grid-item h6 {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Price Styling */
+.price {
+    font-size: 16px;
+    color: #000;
+}
+
+.discount {
+    font-weight: bold;
+    color: red;
+    margin-right: 10px;
+}
+
+.original {
+    font-family:  'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: red;
+}
+
+/* Sale Badge */
+.sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    z-index: 10;               /* ✅ Badge stays on top */
+  }
+
+/* Footer Section */
+.foot {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+/* Responsive Design */
+   
+
+
+@media (max-width: 768px) {
+    .box {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.product-detail {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .image-section img {
+    width: 300px;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .add-to-cart-btn {
+    background-color: #a74d20;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #913f18;
+  }
+
+  .grid-item img {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    object-fit: cover;
+  }
+  
+  .grid-item:hover img {
+    transform: scale(1.05);      /* Slight zoom */
+    opacity: 0.9;                /* Fading effect */
+  }
+  
+  

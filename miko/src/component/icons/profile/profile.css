@@ -1,0 +1,139 @@
+.profilebox{
+   
+    background-color: white;
+    height: 50vh;
+    border-radius: 20px;
+    width: 30vw;
+    position: absolute;
+    padding: 20px;
+   
+}
+.profilemain{
+    background-color: seashell ;
+    height: 100vh;
+    justify-content: center;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.profilebox h1{
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#email{
+   width: 27vw;
+   border: 1px solid #ccc;
+   border-radius: 6px;
+}
+.profilebox button{
+    width: 27vw;
+    background-color: #b25529;
+    font-weight: bold;
+    color: white !important;
+    border-radius: 6px;
+    height: 6vh;
+    border: none;
+}
+#p2{
+    color:  #b25529;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+}
+.loginmain{
+    background-color: seashell;
+    position: relative;
+    height: 100vh;
+    width: 98vw;
+}
+.loginnav{
+    display: flex;
+    height: 15vh;
+    align-items: center;
+    width: 98vw;
+    background-color: white !important;
+    gap: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    border-radius: 10px;
+    justify-content: space-around;
+
+}
+.logbox{
+    position: absolute;
+    height: 90vh;
+    width: 60vw;
+    left: 20%;
+    margin: 10px;
+
+    justify-content: center;
+    align-items: center;
+    background-color: seashell;
+}
+.centernav{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    list-style: none;
+}
+.leftnav{
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+.orderbox{
+    display: flex;
+    width: 60vw;
+    height: 10vh;
+    background-color: white !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+}
+.orderbox h6{
+    position: relative;
+    left: 50px;
+}
+
+.logunder{
+   
+    padding: 20px;
+   
+    position: absolute;
+    right: 0;
+    top: 10vh;
+    height: 30vh;
+    width: 20vw;
+    background-color: white ;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+.logoutbox{
+    list-style: none;
+    padding: 20px;
+    
+}
+.logoutbox li{
+  
+    margin-bottom: 23px;
+}
+.iconunderline{
+    padding: 12px;
+    border-bottom: 2px solid #ccc;
+    display: flex;
+    gap: 20px;
+    opacity: 80%;
+}
+/* .profilebox h3 {
+    position: absolute;
+    left: 20px;
+}
+.profilebox p {
+    position: absolute;
+    top: 50%;
+    opacity: 50%;
+    left: 20px;
+} */

@@ -1,0 +1,44 @@
+.login-container {
+    max-width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    background: #f9f9f9;
+  }
+  .saadaa-logo {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-family: "Arial", sans-serif;
+    color: #ff6600;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #e65c00;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+  

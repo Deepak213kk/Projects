@@ -1,0 +1,15 @@
+.scroll{
+    display: flex;
+    max-height: 500px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+}
+.scrolimg{
+    height: 400px;
+    background-color: seashell;
+    padding: 50px;
+    text-align: center;
+    line-height: 20px;
+    min-width: 400px;
+    font-weight: bold;
+}

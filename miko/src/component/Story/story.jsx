@@ -127,6 +127,16 @@ export default function Story() {
 
                 </div>
             </div>
+            <div className='cominfo'>
+                     <h1><b>COMPANY INFORMATION</b></h1>
+                     <p><span className='infop'>Legal company address:</span>Hameentie 130 A,00560  Helsinki, Finland</p>
+                     <p><span className='infop'>Address for return :</span>Hameentie 130 A,00560  Helsinki, Finland</p>
+                     <p><span className='infop'>Tel:</span>+ 358 50 470 3829</p>
+                     <p><span className='infop'> Email:</span>shop[at]mifuko.fi</p>
+                     <p><span className='infop'>VAT ID :</span>FI22522395</p>
+
+
+                </div>
         </div>
     )
 }

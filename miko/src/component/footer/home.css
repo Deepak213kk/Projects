@@ -1,28 +1,107 @@
-.footer{
-    background-color: rgb(5, 118, 22);
+.tophead{
+    background-color: black;
     color: seashell;
+    justify-content: center;
     text-align: center;
-    width: 100%;
+    width: 98vw;
     height: 100%;
-    position: fixed;
 }
-.home3{
-    background-color: seashell;
-}
+ .shophover.show {
+    display: block; /* or any other display value */
+    /* other styles for visibility, e.g., opacity, z-index */
+  }
 .home2{
     background-color: seashell;
     width: 100%;
+   
+}
+.Homemain{
+    position: relative;
+    top: 17vh;
+}
+.hcc{
+    margin-bottom: 20px;
+}
+.haider{
+    z-index: 101;
+}
+
+  
+.shophover{
+    display: none;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: rgba(107, 69, 11, 0.979);
+    position: absolute;
+    height: 50vh;
+    width: 95vw;
+    top: 16vh;
+    left: 30px;
+    text-align: center;
+    justify-content: space-around;
+   
+    color: white;
+    position: fixed;
+    z-index: 100;
+    opacity: inherit;
+}
+.shophover h1{
+    align-items: center;
+    position: absolute;
+    font-family: cursive;
+    opacity: 20%;
+    top: 10%;
+   font-size: 250px;
+    right: 0%;
+    
+    left: 15%;
+    color: white;
+}
+.shophover ul li{
+    list-style: none;
+
+}
+.hoverdiv{
+    display: flex;
+    gap: 30px;
+}
+.hovershop{
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    cursor: pointer;
+}
+.hovershop h5{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+     
+}
+.shop2{
+    height: 100%;
+    width: 30vw;
+}
+.hover_list{
+    list-style: none;
+    position: relative;
+}
+.mifuko{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .home1{
     background-color: seashell;
     position: fixed;
-    /* //overflow: hidden; */
-    z-index: 1000;
-    width: 100%;
+    /* overflow: hidden; */
+    z-index: 100;
+    max-width: 98vw;
 }
-footer h3{
+/* footer h3{
     height: 100%;
     width: 200%;
+} */
+
+.footer{
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 .navbar1{
     background-color: seashell;
@@ -30,18 +109,48 @@ footer h3{
 }
 .heading{
     height: auto;
-    width: 320;
+}
+.hoverdiv{
+    right: 20px;
+    display: flex;
+    position: relative;
+    top: 30px;
 }
 .na{
     flex-wrap: wrap;
     display: flex;
     list-style-type: none; /* Removes the bullet points */
-           /* Optional: Removes padding */
-           padding: 10px 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px 10px;
     justify-content: space-between;
     font-size: 35px;
     height: 55px;
+    width: 100%;
+    z-index: 100;
+    gap: 10px;
+    cursor: pointer;
+    width: 100%;
     margin-bottom: 25px;
+}
+.hoverstory{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: center;
+    justify-content: space-evenly;
+    gap: 35px;
+}
+.hoverstory ul li{
+    margin-top: 20px;
+    list-style: none;
+    font-variant: small-caps;
+}
+.hovertext{
+    text-shadow: 
+                2px 2px 0px black,  /* Top-left */
+                -2px -2px 0px black, /* Bottom-right */
+                2px -2px 0px black,  /* Top-right */
+                -2px 2px 0px black;
 }
 .nai{
     list-style-type: none; /* Removes the bullet points */
@@ -73,12 +182,13 @@ footer h3{
    padding: 100px;
     position: relative;
     height: 40vh;
-    width: 60vw;
+    width: 70vw;
     left: 20%;
 }
-.para{
+.para2{
     position: relative;
    right: 20px;
+   width: 40vw;
 }
 .head4{
     position: relative;
@@ -176,96 +286,21 @@ ul li{
     font-family: bold;
 
 }
+.readbox{
+    width: 25vw;
+}
 .readnow p{
     padding: 20px;
+    width: 20vw;
     font-size: 20px;
     
 }
 .readnow button{
     border: none currentColor;
 }
-.capsule{
-    text-align: center;
-    font-weight: bold;
-    padding: 10px;
-    position: relative;
+
+.HHaider{
     margin-bottom: 20px;
-}
-.capsule p{
-    font-size: 10px;
-    letter-spacing: 2px;
-    word-spacing: 2px;
-}
-.capsule h1{
-    font-weight: bold;
-}
-.capsuleimg{
-    display: flex;
-    flex-wrap: wrap;
-    position: absolute;
-    gap: 80vh;
-    background-color: seashell;
-   width: 100%;
-   right: 30px;
-    justify-content: space-evenly;
-}
-.capsuletitle{
-    position: absolute;
-    z-index: 20px;
-    height: 13vh;
-    width: 35vw;
-    font-weight: bold;
-    padding: 100px;
-    left: 68vh;
-}
-.readnow2img{
-    position: relative;
-    top: 67vh;
-    background-color: seashell;
-    left: 70px;
-}
-.readnowtitle2{
-    height: 60vh;
-    width: 32vw;
-    background-color: rgb(214, 94, 18);
-    position: absolute;
-    top: 21vh;
-    color: white;
-    text-align: center;
-    padding: 10vh;
-    font-weight: bold;
-    left: 4.5vw;
-}
-.readnowtitle2 p{
-    padding: 20px;
-}
-.readnowtitle2 button{
-    left: 0px;
-    position: relative;
-    border: none;
-    color:  rgb(214, 94, 18);
-
-}
-.seen{
-    text-align: center;
-    margin-top: 10vh;
-    position: relative;
-    right: 20px;
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-.seenimg{
-    left: 0%;
-    height: 20vh;
-    padding: 12vh;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-evenly;
-    margin-bottom: 10px;
-    gap: 50px;
-
-
 }
 .sustainimg{
     padding: 20px;
@@ -312,6 +347,7 @@ ul li{
     width: 25vw;
     padding: 20px;
 }
-.footer2{
+.fo{
     position: absolute;
+    margin: auto;
 }
