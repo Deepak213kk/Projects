@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+  <div class="min-h-screen flex flex-col gap-4 p-4">
+  <!-- Header -->
+  <div class="w-full h-16 bg-gray-200 flex items-center justify-center">
+    Todo List 
+  </div>
+
+  <!-- Main Content: Sidebar + Content -->
+  <div class="flex flex-grow gap-4">
+    <div class="flex-grow bg-gray-100 rounded flex justify-center items-center border-4 p-4">
+     <div class="w-full border-2 h-10 bg-indigo-300" id="data">
+     </div>
+     <button class="w-[10vw] bg-red-600 cursor-pointer rounded h-10 ml-5"> Delete </button>
+    </div>
+    <!-- Sidebar -->
+    <div class="w-1/4 bg-gray-300 p-4 flex flex-col justify-center items-center">
+      Enter your task:<input type="text" placeholder="Task name" id="user" class="border-2 rounded mb-10">
+      <button class="border-2 rounded w-15 cursor-pointer" onclick="add()"> Add</button>
+    </div>
+
+    <!-- Content -->
+    
+  </div>
+
+  <!-- Footer -->
+  <div class="w-full h-16 bg-gray-200 flex items-center justify-center">
+    Footer
+  </div>
+</div>
+<script src="Todo.js">
+
+</script>
+</body>
+
+
+</html>
