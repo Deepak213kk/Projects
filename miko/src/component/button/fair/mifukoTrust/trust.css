@@ -1,0 +1,54 @@
+.trust-container {
+   display: flex;
+   flex-direction: column; /* Stack elements vertically */
+   align-items: center;   /* Center-align the content */
+   gap: 20px;             /* Add spacing between elements */
+ }
+ .trusthaider {
+   width: 100%;  /* Ensure it takes full width */
+ }
+ .mtrustbtn img {
+   display: block;
+   top: 15vw;
+   margin: 20 auto ; /* Center the image horizontally */
+ }
+ .aboutus{
+   width: 50%;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+ }
+ .aboutcon{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px;
+   max-width: 1200px;
+   margin: 0 auto;
+ }
+ .aboutsus{
+   margin-top: 20px;
+   display: contents;
+   justify-content: center;
+   align-items: center;
+ }
+ .aboutsus p{
+   width: 45vw;
+ }
+ .contact{
+   padding: 30px;
+   display: block;
+   justify-content: center;
+   align-items: center;
+   width: 15vw;
+ }
+ .contact{
+   font-weight: 450;
+ }
+ .contactdetail{
+  display: flex;
+ }
+ .truststaff{
+  padding: 33px;
+  
+ }

@@ -1,0 +1,33 @@
+.blogimg{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 20px;
+   
+
+}
+.main{
+     background-color: rgba(3, 62, 3, 0.822);
+     height: 85vh;
+     color: white;
+
+}
+.blogh1 p{
+    font-family: 'Times New Roman', Times, serif;
+}
+.blogimg h4{
+    position: relative;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    width: 25vw;
+    font-weight: bold;
+}
+.blogpart1{
+    width: 25vw; 
+}
+.blogp{
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
+}

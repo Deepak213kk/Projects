@@ -1,0 +1,25 @@
+.container {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .products, .cart {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  button {
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  

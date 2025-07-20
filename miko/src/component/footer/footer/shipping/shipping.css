@@ -1,0 +1,64 @@
+.Shiphaider{
+    position: relative;
+    top: 15vh;
+    
+}
+.shiph1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    color: white;
+    gap: 10px;
+    width: 100%;
+   
+}
+.Shippinglist{
+    list-style: none;
+    font-weight: 700;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px;
+    width: 50vw;
+}
+.Shippinglist p{
+    font-weight: 450;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    
+}
+.listcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+    
+}
+.listcontainer h5{
+    font-weight: bold;
+}
+.HShippinglist{
+    background-color: seashell;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid black;
+    height: 8vh;
+    border-radius: 10px;
+}
+.inHShippinglist{
+    width: 100%;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid black;
+    height: 8vh;
+    border-radius: 10px;
+}

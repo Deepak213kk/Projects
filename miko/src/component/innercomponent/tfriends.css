@@ -1,0 +1,13 @@
+.friends{
+    display: flex;
+    
+    gap: 30px;
+    justify-content: center;
+    justify-content: space-evenly;
+    background-color: rgba(216, 107, 18, 0.974);
+    width: 98vw;
+}
+.friends p{
+    margin-top: 30px;
+    width: 28vw;
+}

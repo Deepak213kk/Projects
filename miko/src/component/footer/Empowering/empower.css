@@ -1,0 +1,24 @@
+.Hempowering{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(214, 94, 18);;
+    margin-top: 10vh;
+    
+}
+.Hempowering p{
+    font-weight: 600;
+    margin-top: 10px;
+}
+.empoweringh2{
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    margin-top: 10px;
+} 
+.Hempowering span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

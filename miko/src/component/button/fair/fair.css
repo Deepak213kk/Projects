@@ -1,0 +1,152 @@
+.fairpara{
+    padding: 10vh;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    width: 80%;
+    left: 10%;
+
+}
+
+.fairprinciple{
+    justify-content: center;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.blogbox{
+    margin-top: 0%;
+    position: relative;
+
+    background-color: red;
+    width: 90vw;
+    height: 60vh;
+}
+.readbox{
+    display: flex;
+    margin-bottom: 40px;
+    gap: 8vw;
+    position: relative;
+  
+}
+.Bcropsimg{
+    position: relative;
+    top: 17vh;
+   
+}
+.Bhead2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15vh;
+}
+.Bhead2 p{
+    font-weight: 500;
+    
+}
+.Bhead3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15vh;
+    gap: 30px;
+    justify-content: space-evenly;
+}
+.Bhead3 p{
+    width: 50vh;
+    margin-top: 30px;
+    font-weight: bold;
+
+}
+.Bhead3 button{
+    background-color: rgba(198, 93, 1, 0.993);
+    color: white;
+    border: none;
+    height: 5vh;
+    width: 15vw;
+    font-weight: bold   ;
+
+}
+.Bhead4{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+
+}
+.Bhead4div{
+    width: 15vw;
+    height: 30vh;
+    margin-bottom: 40vh;
+   
+}
+.Bhead4div h4{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    display: flex;
+}
+.Bhead4div button{
+    margin-top: 10px;
+    height: 5vh;
+    width: 10vw;
+    color: white;
+    background-color: rgb(180, 85, 2);
+    border: none;
+    align-items: center;
+}
+.readmore{
+    position: relative;
+    top: 50vh;
+    left: 10vw;
+   
+    width: 88vw;
+    
+    
+}
+.readmore h3 {
+    padding: 20px;
+    margin: 0;
+    
+    width: auto;
+}
+.readmore p{
+    width: 19vw;
+    
+}
+.readmore button{
+    margin-top: 20px;
+    background-color: darkorange;
+    border-radius: 10%;
+    display: flex;
+    height: 4vh;
+    width: 6vw;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: white    ;
+    font-weight: bold;
+}
+.fairprinciple div{
+    margin-bottom: 40px;
+    
+}
+.fairprincipleimg{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+   font-weight: 500;
+    row-gap: 60vh;
+}
+.imgcontainer{
+    height: 23vh;
+    width: 20vw;
+    
+}

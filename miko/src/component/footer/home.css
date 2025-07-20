@@ -1,0 +1,353 @@
+.tophead{
+    background-color: black;
+    color: seashell;
+    justify-content: center;
+    text-align: center;
+    width: 98vw;
+    height: 100%;
+}
+ .shophover.show {
+    display: block; /* or any other display value */
+    /* other styles for visibility, e.g., opacity, z-index */
+  }
+.home2{
+    background-color: seashell;
+    width: 100%;
+   
+}
+.Homemain{
+    position: relative;
+    top: 17vh;
+}
+.hcc{
+    margin-bottom: 20px;
+}
+.haider{
+    z-index: 101;
+}
+
+  
+.shophover{
+    display: none;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: rgba(107, 69, 11, 0.979);
+    position: absolute;
+    height: 50vh;
+    width: 95vw;
+    top: 16vh;
+    left: 30px;
+    text-align: center;
+    justify-content: space-around;
+   
+    color: white;
+    position: fixed;
+    z-index: 100;
+    opacity: inherit;
+}
+.shophover h1{
+    align-items: center;
+    position: absolute;
+    font-family: cursive;
+    opacity: 20%;
+    top: 10%;
+   font-size: 250px;
+    right: 0%;
+    
+    left: 15%;
+    color: white;
+}
+.shophover ul li{
+    list-style: none;
+
+}
+.hoverdiv{
+    display: flex;
+    gap: 30px;
+}
+.hovershop{
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    cursor: pointer;
+}
+.hovershop h5{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+     
+}
+.shop2{
+    height: 100%;
+    width: 30vw;
+}
+.hover_list{
+    list-style: none;
+    position: relative;
+}
+.mifuko{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.home1{
+    background-color: seashell;
+    position: fixed;
+    /* overflow: hidden; */
+    z-index: 100;
+    max-width: 98vw;
+}
+/* footer h3{
+    height: 100%;
+    width: 200%;
+} */
+
+.footer{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.navbar1{
+    background-color: seashell;
+    height: 200%;
+}
+.heading{
+    height: auto;
+}
+.hoverdiv{
+    right: 20px;
+    display: flex;
+    position: relative;
+    top: 30px;
+}
+.na{
+    flex-wrap: wrap;
+    display: flex;
+    list-style-type: none; /* Removes the bullet points */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px 10px;
+    justify-content: space-between;
+    font-size: 35px;
+    height: 55px;
+    width: 100%;
+    z-index: 100;
+    gap: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 25px;
+}
+.hoverstory{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: center;
+    justify-content: space-evenly;
+    gap: 35px;
+}
+.hoverstory ul li{
+    margin-top: 20px;
+    list-style: none;
+    font-variant: small-caps;
+}
+.hovertext{
+    text-shadow: 
+                2px 2px 0px black,  /* Top-left */
+                -2px -2px 0px black, /* Bottom-right */
+                2px -2px 0px black,  /* Top-right */
+                -2px 2px 0px black;
+}
+.nai{
+    list-style-type: none; /* Removes the bullet points */
+    padding: 15px ;           /* Optional: Removes padding */
+    margin: 0;  
+    font-size: 18px;
+}
+.img1{
+   display: flex;
+   position: relative;
+   justify-content: center;
+   top: 80px;
+   left: 50px;
+
+    flex-wrap: wrap;
+    padding: 120px;
+}
+.img2{
+    position: relative;
+    top: -78px;
+    padding: 50px;
+    margin: 30px;
+}
+.nav3{
+    font-weight: bold;
+}
+.head2{
+   align-items: center;
+   padding: 100px;
+    position: relative;
+    height: 40vh;
+    width: 70vw;
+    left: 20%;
+}
+.para2{
+    position: relative;
+   right: 20px;
+   width: 40vw;
+}
+.head4{
+    position: relative;
+    justify-content: center;
+    left: 80px;
+}
+.head3{
+    color: brown;
+    font-weight: bold;
+}
+ul li{
+    margin: 10px 20px;
+    margin: 10px 20px;
+
+}
+.navbar2{
+    height: 50vh;
+    width: 100vw;
+
+
+}
+.navb2ul{
+    position: relative;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+    padding: 0px;
+}
+.handmade{
+    padding: 40px;
+    position: relative;
+    left: 45%;
+    font-size: 10px;
+}
+.handmade h1{
+    align-items: center;
+    font-weight: bold;
+    padding: 20px;
+    position: relative;
+    right: 300px;
+}
+.scrollimg{
+   height: 500px;
+    background-color: seashell;
+    padding: 50px;
+    text-align: center;
+    line-height: 20px;
+    min-width: 400px;
+    font-weight: bold;
+}
+.scrollbar::-webkit-scrollbar{
+    width: 10px;
+}
+.scrollbar{
+    display: flex;
+    max-height: 500px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+}
+#l1{
+    border: none;
+    background-color: seashell;
+}
+#l1 option{
+    font-weight: 500;
+}
+.readnow{
+    height: 81vh;
+    width: 33vw;
+    position: absolute;
+    border: 2px solid hsl(134, 93%, 27%);
+    background-color: hsl(134, 93%, 27%);
+    z-index: 10;
+    top: 188px;
+    left: 78px;
+}
+.readnowimg{
+    position: relative;
+    padding: 20px 20px;
+}
+.readnow{
+    padding: 50px 20px;
+    text-align: center;
+}
+.readnow img{
+    justify-self: center;
+}
+.readnow{
+    color: white;
+    padding: 50px;
+    font-family: bold;
+
+}
+.readbox{
+    width: 25vw;
+}
+.readnow p{
+    padding: 20px;
+    width: 20vw;
+    font-size: 20px;
+    
+}
+.readnow button{
+    border: none currentColor;
+}
+
+.HHaider{
+    margin-bottom: 20px;
+}
+.sustainimg{
+    padding: 20px;
+    background-color: seashell;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+}
+
+.seenout{
+    height: 20vh;
+    background-color: white;
+    padding: 15px;
+}
+.blog{
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    color: white;
+    height: 90vh;
+    background-color: rgba(59, 96, 2, 0.99);
+}
+.blog p{
+    font-size: 10px;
+}
+.blogimg{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    gap: 60px;
+    margin: 20px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 30px;
+}
+.blogimg p{
+    padding-top: 20px;
+    font-size: 15px;
+}
+.blogimg1{
+    height: 20vh;
+    width: 25vw;
+    padding: 20px;
+}
+.fo{
+    position: absolute;
+    margin: auto;
+}

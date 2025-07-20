@@ -1,0 +1,29 @@
+.mstory{
+    padding-top: 123px;
+}
+.whatismifuko{
+        display: flex;
+        background-color: seashell;
+        padding: 50px;
+        justify-content: space-around;
+        
+}
+.mifuko{
+    max-width: 30vw;
+}
+.storyvideo{
+    background-color: black;
+    height: 60vh;
+    max-width: 100%;
+}
+.mstory{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: seashell;
+    justify-content: space-evenly;
+    padding: 30px;
+}
+.cvvpara{
+    width: 30vw;
+}

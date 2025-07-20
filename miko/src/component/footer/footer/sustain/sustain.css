@@ -1,0 +1,7 @@
+.Hsustainimg{
+    padding: 20px;
+    background-color: seashell;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

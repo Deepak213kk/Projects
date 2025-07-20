@@ -1,0 +1,43 @@
+
+.CCollection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+.HCcollection{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+.HCcollection h4{
+    font-weight: 600;
+    width: 20vw;
+}
+.ccollectionpara{
+    position: relative;    
+    display: flex;
+    justify-content: center;
+    width: 50vw;
+   
+}
+.ccollectionpara h4{
+    position: absolute;
+    bottom: 15vh;
+    width: 23vw;
+    font-weight: 650;
+}
+.ccp{
+    position: absolute;
+    bottom: 7vh;
+    left: 12vh;
+    font-weight: 600;
+}
+.ccmain{
+    background-color: seashell;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}

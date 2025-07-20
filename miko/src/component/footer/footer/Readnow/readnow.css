@@ -1,0 +1,27 @@
+.hreadnow{
+    height: 70vh;
+    width: 38vw;
+    background-color: rgb(214, 94, 18);
+    position: absolute;
+    top: 21vh;
+    color: white;
+    text-align: center;
+    padding: 10vh;
+    font-weight: bold;
+    left: 4.5vw;
+}
+.hreadnow p{
+    width: 30vw;
+    margin-bottom: 5vh;
+
+}
+.hreadnow button{
+    border: none;
+    color: rgb(214, 94, 18);
+    height: 5vh;
+    width: 13vw;
+  
+}
+.HReadnowimg{
+    position: relative;
+}
