@@ -1,0 +1,43 @@
+.cart-container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 ;
+    padding: 20px;
+    background-color: #FFFDE7;
+}
+.cart-text{
+    background-color: white;
+    margin-left: 1rem;
+    text-align: center;
+    
+}
+.left-container{
+    width: 60%;
+    float: left;
+    padding: 10px;
+}
+.right-div{
+    width: 30%;
+    height: auto;
+    background-color: #FFF9BF;
+}
+.label-cart{
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+}
+.micro-cart{
+  
+    height: 6rem;
+}
+.promocode{
+    opacity: 80%;
+    border-radius: 20%;
+    width: 10rem;
+    border: none;
+}
+.topay{
+    background-color: #FF7F3F;
+    color: white;
+    border: none;
+    height: 2.5rem;
+}

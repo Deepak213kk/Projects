@@ -1,0 +1,19 @@
+.feedback-main{
+    height: 10rem;
+    width: 20rem;
+}
+.feedback-text{
+    font-size: 12px;
+}
+.feedback-img{
+    border-radius: 50%;
+    height: 7rem;
+    width: 6rem;
+}
+/* When screen width is 576px or below (Bootstrap's mobile breakpoint) */
+@media (max-width: 576px) {
+  .feedback-text{
+    font-size: 0.8rem;   
+    line-height: 1.3;   
+  }
+}

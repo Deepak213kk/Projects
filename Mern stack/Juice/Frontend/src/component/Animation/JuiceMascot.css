@@ -1,0 +1,84 @@
+.scene {
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: #f9fff3;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Mascot sprite */
+.mascot {
+  width: 260px;              /* frame width */
+  height: 260px;             /* frame height */
+  background-image: url("/mosambi-walk.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+
+  animation:
+    walk 0.9s steps(6) infinite,
+    move 3.2s ease-out forwards,
+    bounce 1s ease-in-out infinite;
+}
+
+/* Sprite frame animation */
+@keyframes walk {
+  from { background-position: 0 0; }
+  to   { background-position: -1560px 0; } /* 260px × 6 */
+}
+
+/* Forward walking movement */
+@keyframes move {
+  from { transform: translateX(-90vw); }
+  to   { transform: translateX(0); }
+}
+
+/* Cute body bounce */
+@keyframes bounce {
+  0%, 100% { margin-bottom: 0; }
+  50% { margin-bottom: 8px; }
+}
+
+/* Hand board */
+.board {
+  position: absolute;
+  bottom: 300px;
+  background: white;
+  padding: 10px 18px;
+  border-radius: 16px;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: boardShow 0.6s ease forwards;
+  animation-delay: 3.3s;
+}
+
+/* Board appear animation */
+@keyframes boardShow {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Mobile optimization */
+@media (max-width: 768px) {
+  .mascot {
+    width: 180px;
+    height: 180px;
+
+    animation:
+      walk 1.1s steps(6) infinite,
+      move 4.5s ease-out forwards,
+      bounce 1.2s ease-in-out infinite;
+  }
+
+  .board {
+    bottom: 220px;
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}

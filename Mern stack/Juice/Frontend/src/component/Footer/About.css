@@ -1,0 +1,46 @@
+.main-about{
+    background-color: #FF7F3F;
+}
+.hero-img{
+    padding: 10px;
+
+}
+.hero-img img{
+     width: 100%;        /* or a custom width */
+  max-width: 500px;   /* prevent it from growing too large */
+  height: auto;       /* keep proportions */
+  object-fit: contain; /* or cover if you want cropping */
+  display: block;
+}
+.card{
+    border: none;
+    font-weight: bold;
+    height: 9rem;
+    width: 18rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+}
+.card h6{
+    font-size: 1rem;
+    text-align: center;
+    height: auto;
+    width: 10rem;
+}
+.about-card{
+    justify-content: space-around;
+}
+@media (max-width: 576px) {
+  .card{
+    flex-direction: column;   /* keep proper ratio */
+  }
+}
+@media (max-width: 576px) {
+  .hero-img {
+    width: 70%;   /* make small */
+    height: auto;
+  }
+}
+

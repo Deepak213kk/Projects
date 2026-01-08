@@ -1,0 +1,61 @@
+/* Container */
+.mascot-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Orange glow background */
+.orange-glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #ffd8a8, #ff8c00);
+  border-radius: 50%;
+  filter: blur(35px);
+  opacity: 0.9;
+}
+
+/* Floating animation */
+.mascot-float {
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* Mascot image */
+.mascot-img {
+  transform-origin: 70% 45%;
+  animation: wave 2.5s ease-in-out infinite;
+}
+
+/* Hand wave motion */
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(6deg); }
+  20% { transform: rotate(-6deg); }
+  30% { transform: rotate(6deg); }
+  40% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+/* Speech bubble */
+.speech-bubble {
+  position: absolute;
+  top: -55px;
+  right: -35px;
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+
+/* Floating motion */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}

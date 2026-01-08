@@ -1,0 +1,134 @@
+/* ===== Container ===== */
+.featured-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  
+  
+}
+
+.featured-title {
+    margin-top: 10px;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ===== Scroll Card ===== */
+.featured-scroll {
+  align-items: flex-start;
+  background-color: #D9D9D9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 300px;
+  height: auto;
+  margin-right: 20px;
+  padding: 15px;
+  flex-shrink: 0;
+  vertical-align: top;
+  transition: transform 0.3s ease;
+  box-sizing: border-box;
+  
+}
+
+.featured-scroll:hover {
+  transform: scale(1.03);
+}
+
+/* ===== Image ===== */
+.feature-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.feature-img img {
+  width: 170px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 12px;
+  margin-bottom: 10px;
+}
+
+/* ===== Text Section ===== */
+.featured-scroll h5 {
+    text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.featured-scroll p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+  margin-top: 10px;
+  white-space: normal; /* ✅ allows text to wrap */
+  max-width: 250px; /* ✅ keeps text inside box */
+}
+
+.featured-scroll span {
+  display: block;
+  margin: 8px 0;
+  font-weight: bold;
+  color: black;
+}
+
+.featured-scroll button {
+  background: #ff8800;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.85rem;
+  transition:  0.3s ease;
+   display: block;
+  margin: 10px auto;
+}
+
+.featured-scroll button:hover {
+  background: #e67300;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .featured-scroll {
+    width: 260px;
+    padding: 10px;
+  }
+
+  .feature-img img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .featured-scroll p {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-scroll {
+    width: 230px;
+    padding: 8px;
+  }
+
+  .feature-img img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .featured-scroll p {
+    font-size: 0.85rem;
+    max-width: 110px;
+  }
+}
