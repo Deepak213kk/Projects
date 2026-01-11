@@ -1,38 +1,37 @@
-const dotenv = require('dotenv');
-dotenv.config();
-const cors = require('cors');
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const db = require("./Config/Db");
 
-const db = require('./Config/Db');
-const authRoutes = require('./Routes/auth.js');
-const shippingRoutes = require('./Routes/Shipping.js');
-const protect = require("./Controller/authmiddleware/authmiddleware.js");
-const productRoutes = require('./Routes/Productroutes.js');
-const cartRoutes = require('./Routes/Cartroutes.js');
+dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true,
-}));
+// Middleware
+console.log(process.env.CLOUD_NAME);
 
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
-app.use('/api/products', productRoutes);
-app.use('/api/auth', authRoutes);
-app.use("/api/userdetail", protect, shippingRoutes);
-app.use("/api", cartRoutes);
+app.use("/api/auth", require("./Routes/auth"));
+app.use("/api/cart", require("./Routes/Cartroutes"));
+app.use("/api/products", require("./Routes/Productroutes"));
 
-app.get('/', (req, res) => {
-  res.send('Server Running');
+// Test protected route
+const authMiddleware = require("./Controller/authmiddleware/authmiddleware");
+
+app.get("/api/protected", authMiddleware, (req, res) => {
+  res.json({ message: "Protected route accessed", userId: req.user.id });
 });
 
 const PORT = process.env.PORT || 5000;
 
 db().then(() => {
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
   });
 });

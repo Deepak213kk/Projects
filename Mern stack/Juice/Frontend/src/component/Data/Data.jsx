@@ -11,7 +11,6 @@ const juiceProducts = [
     name: "Fresh Mosambi Juice",
     image: juiceImage1,
     price: 200,
-    oldPrice: 6.99,
     description:
       "Freshly squeezed orange juice made from 100% natural oranges. No added sugar.",
     quantity: 50,

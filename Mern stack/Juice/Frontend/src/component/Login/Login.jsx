@@ -3,48 +3,61 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.css";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
+import { useContext } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   //const { clearCart, setCartFromDB } = useContext(CartContext);
+  const { login } = useContext(AuthContext);
+//  const handleLogin = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const res = await axios.post("http://localhost:5000/api/auth/login", {
+//         Email,
+//         Password
+//       });
+
+//       login(res.data.token);
+//       navigate("/", { replace: true });
+//     } catch (error) {
+//       alert(error.response?.data?.message || "Login failed");
+//     }
+//   };
 
   const loginfunction = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    try {
-      // 🔐 LOGIN
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        {
-          email: Email,
-          password: Password,
-        }
-      );
+  if (!Email || !Password) {
+    alert("Email and Password are required");
+    return;
+  }
 
-      const { token } = res.data;
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/api/auth/login",
+      {
+        email: Email.trim(),
+        password: Password.trim(),
+      }
+    );
 
-      localStorage.setItem("token", token);
+    login(res.data.token);
 
-      console.log("LOGIN RESPONSE:", res.data);
+    localStorage.setItem("token", res.data.token);
 
-      // 🔥 IMPORTANT FIX
-      window.location.reload();   // <-- THIS LINE FIXES EVERYTHING
+    alert("Login successful!");
 
-      // navigate("/home"); ❌ REMOVE THIS
-    } catch (error) {
-      console.log("FULL ERROR:", error);
-      console.log("RESPONSE:", error.response);
-      console.log("DATA:", error.response?.data);
-      alert(
-        error.response?.data?.message || "Login Failed"
-      );
-    }
+    navigate("/home");  // go to home page
+  } catch (error) {
+    console.log("ERROR RESPONSE:", error.response?.data);
+    alert(error.response?.data?.message || "Login Failed");
+  }
+};
 
-
-  };
 
   return (
     <div className="px-3 juice-bg d-flex align-items-center justify-content-center flex-column vh-100">

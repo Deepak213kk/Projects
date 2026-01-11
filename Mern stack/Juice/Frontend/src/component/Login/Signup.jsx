@@ -2,9 +2,25 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import "./Login.css"; // reuse same CSS + font
 import Signupanimation from "../Animation/Signupanimation"
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 //import signupimg from "../../assets/Signupimg.png"
 
 export default function Signup() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const submit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:5000/api/auth/signup", {
+      name,
+      email,
+      password
+    });
+    navigate("/login");
+  };
   return (
     <div className="container-fluid vh-100 juice-bg">
       <div className="row h-100">
@@ -21,49 +37,12 @@ export default function Signup() {
             </div>
 
             {/* Form */}
-            <form>
-              <div className="mb-3">
-                <label className="form-label">Full Name</label>
-                <input
-                  type="text"
-                  className="form-control rounded-pill"
-                  placeholder="Enter your name"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Email address</label>
-                <input
-                  type="email"
-                  className="form-control rounded-pill"
-                  placeholder="Enter email"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Password</label>
-                <input
-                  type="password"
-                  className="form-control rounded-pill"
-                  placeholder="Create password"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Confirm Password</label>
-                <input
-                  type="password"
-                  className="form-control rounded-pill"
-                  placeholder="Confirm password"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="py-2 btn btn-orange w-100 rounded-pill"
-              >
-                Register
-              </button>
+            <form onSubmit={submit}>
+              <h2>Signup</h2>
+              <input placeholder="Name" onChange={e => setName(e.target.value)} />
+              <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
+              <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+              <button>Register</button>
             </form>
 
             <p className="mt-4 text-center small">
@@ -77,7 +56,7 @@ export default function Signup() {
 
         {/* RIGHT SIDE - BLANK (FOR FUTURE USE) */}
         <div className="col-md-7 d-none d-md-block ">
-          <Signupanimation/>
+          <Signupanimation />
         </div>
 
       </div>

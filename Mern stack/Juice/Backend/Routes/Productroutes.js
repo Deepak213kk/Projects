@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Productmodel');
+const upload = require('../Controller/uploadmiddleware/uploadmiddleware');
 
 // GET /api/products - fetch all products
 router.get('/', async (req, res) => {
@@ -13,6 +14,29 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
+router.post("/", upload.single("image"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "Image is required" });
+    }
+
+    const product = await Product.create({
+      name: req.body.name,
+      price: req.body.price,
+      description: req.body.description,
+      image: req.file.path, // Cloudinary URL
+    });
+
+    res.status(201).json(product);
+
+  } catch (error) {
+    console.error("Product upload error:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 
 module.exports = router;

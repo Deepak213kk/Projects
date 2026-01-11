@@ -15,12 +15,12 @@ const Feedback = () => {
                 <div className='d-flex flex-column '>
                     <h6 className='mt-3 ms-5'>Feedback1 </h6>
 
-                    <p className='feed-para fs-6'>
+                    <div className='feed-para fs-6'>
                         <span className='ms-5'> by</span>
                         <div className='mt-2 ms-0 review d-flex ms-3' > <IoMdStar color='#FFC107' /><IoMdStar color='#FFC107' /> <IoMdStar color='#FFC107' /> <IoMdStarHalf color='#FFC107' /> <IoMdStarOutline color='#FFC107' /> </div>
                         <div className='mt-2 feedback-text ms-3 '>
                             "Absolutely love the freshness  tastes just like fruit straight from the farm!"                         </div>
-                    </p>
+                    </div>
 
                 </div>
             </div>
