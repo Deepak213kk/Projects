@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 import product from '../Data/Data.jsx';
  import { FaBackward } from "react-icons/fa";
 import Footer from '../Footer2/Footer.jsx';
+// import axios from 'axios';
+// import { useEffect } from 'react';
 //import { useEffect } from 'react';
 const Productdetail = () => {
   const [activeTab, setActiveTab] = useState("description");
@@ -18,6 +20,10 @@ const Productdetail = () => {
 
   const currentproduct = product.find((prod) => prod.id === Number(id))
 
+  // useEffect(() => {
+  //   axios.
+  // }, [id]);
+  
   
 
   return (

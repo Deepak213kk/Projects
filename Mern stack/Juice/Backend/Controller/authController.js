@@ -5,6 +5,7 @@ const User = require('../models/User.js');
 exports.signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    console.log("SIGNUP BODY:", req.body);
 
     // 1️⃣ Check existing user
     const exist = await User.findOne({ email: email.toLowerCase().trim() });

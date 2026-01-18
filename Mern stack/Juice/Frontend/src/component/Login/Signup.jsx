@@ -1,10 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import "./Login.css"; // reuse same CSS + font
+import "./Login.css"; // reuse same CSS + font
 import Signupanimation from "../Animation/Signupanimation"
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //import signupimg from "../../assets/Signupimg.png"
 
 export default function Signup() {
@@ -14,13 +14,22 @@ export default function Signup() {
   const navigate = useNavigate();
   const submit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/api/auth/signup", {
-      name,
-      email,
-      password
-    });
-    navigate("/login");
+
+    try {
+      await axios.post("http://localhost:5000/api/auth/signup", {
+        name: name.trim(),
+        email: email.trim(),
+        password: password.trim(),
+      });
+
+      alert("Signup successful");
+      navigate("/");
+    } catch (error) {
+      console.log("SIGNUP ERROR:", error.response?.data);
+      alert(error.response?.data?.message || "Signup failed");
+    }
   };
+
   return (
     <div className="container-fluid vh-100 juice-bg">
       <div className="row h-100">
@@ -42,14 +51,14 @@ export default function Signup() {
               <input placeholder="Name" onChange={e => setName(e.target.value)} />
               <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
               <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-              <button>Register</button>
+              <button type="submit" >Register</button>
             </form>
 
             <p className="mt-4 text-center small">
               Already have an account?
-              <a href="#" className="ms-2 text-orange fw-semibold">
+              <Link to="/login" className="ms-2 text-orange fw-semibold">
                 Login
-              </a>
+              </Link>
             </p>
           </div>
         </div>
