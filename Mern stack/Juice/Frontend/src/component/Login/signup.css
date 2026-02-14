@@ -1,0 +1,57 @@
+/* Background */
+.signup-bg {
+  background: linear-gradient(135deg, #f6d5c3, #e7c6d3);
+}
+
+/* Glass Card */
+.signup-card {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo */
+.logo-icon {
+  font-size: 40px;
+}
+
+.brand-text {
+  color: #ff7a18;
+}
+
+/* Inputs */
+.input-modern {
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.input-modern:focus {
+  box-shadow: 0 0 0 2px rgba(255, 122, 24, 0.3);
+}
+
+/* Button */
+.btn-modern {
+  border-radius: 30px;
+  padding: 10px;
+  font-weight: 600;
+  border: none;
+  color: white;
+  background: linear-gradient(to right, #ff7a18, #ff4e8a);
+  transition: 0.3s;
+}
+
+.btn-modern:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Link */
+.login-link {
+  color: #ff7a18;
+  font-weight: 600;
+  text-decoration: none;
+}

@@ -10,34 +10,34 @@ export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const [cartTotal, setCartTotal] = useState(0);
 
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   // 🔹 Fetch Cart
   const fetchCart = useCallback(async () => {
-  if (!token) {
-    dispatch({ type: "CLEAR_CART" });
-    return;
-  }
-
-  try {
-    const res = await fetch(`${API_URL}/cart`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    // If backend sends 4xx/5xx, don't try to parse JSON
-    if (!res.ok) {
-      console.error("Cart request failed:", res.status, res.statusText);
+    if (!token) {
+      dispatch({ type: "CLEAR_CART" });
       return;
     }
 
-    const data = await res.json();
-    dispatch({ type: "SET_CART", payload: data });
-  } catch (err) {
-    console.error("Fetch cart error:", err);
-  }
-}, [token]);
+    try {
+      const res = await fetch(`${API_URL}/cart`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // If backend sends 4xx/5xx, don't try to parse JSON
+      if (!res.ok) {
+        console.error("Cart request failed:", res.status, res.statusText);
+        return;
+      }
+
+      const data = await res.json();
+      dispatch({ type: "SET_CART", payload: data });
+    } catch (err) {
+      console.error("Fetch cart error:", err);
+    }
+  }, [token]);
 
 
   // 🔹 Add to cart
@@ -57,6 +57,7 @@ export function CartProvider({ children }) {
     });
 
     fetchCart();
+    alert("Product added to cart");
   };
 
   // 🔹 Remove from cart
@@ -105,24 +106,27 @@ export function CartProvider({ children }) {
   const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
     localStorage.removeItem("token");
+    setToken(null);
   };
 
   // 🔹 Calculate total
+ useEffect(() => {
+  const total = state.cart.reduce(
+    (sum, item) =>
+      sum + (item?.productId?.price || 0) * (item?.quantity || 0),
+    0
+  );
+
+  setCartTotal(total);
+}, [state.cart]);
+
+
+
   useEffect(() => {
-    if (!Array.isArray(state.cart)) return;
+  fetchCart();
+}, [fetchCart]);
 
-    const total = state.cart.reduce(
-      (sum, item) => sum + item.productId.price * item.quantity,
-      0
-    );
 
-    setCartTotal(total);
-  }, [state.cart]);
-
-  // 🔹 Load cart on refresh / login
-  useEffect(() => {
-    fetchCart();
-  }, [fetchCart]);
 
   return (
     <CartContext.Provider

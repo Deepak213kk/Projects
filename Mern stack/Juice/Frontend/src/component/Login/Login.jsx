@@ -28,8 +28,8 @@ export default function Login() {
 //     }
 //   };
 
-  const loginfunction = async (event) => {
-  event.preventDefault();
+  const loginfunction = async () => {
+   event.preventDefault();
 
   if (!Email || !Password) {
     alert("Email and Password are required");

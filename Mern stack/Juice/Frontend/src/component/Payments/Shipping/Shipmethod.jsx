@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 
-const Shipmethod = ({ onContinue }) => {
+const Shipmethod = ({ onContinue, setShowPayment }) => {
   const [contact, setContact] = useState("");
   const [addr, setAddr] = useState("");
   const [addressData, setAddressData] = useState(null);
@@ -11,7 +11,7 @@ const Shipmethod = ({ onContinue }) => {
   useEffect(() => {
     const fetchAddress = async () => {
       try {
-        const res = await axios.get("/api/address", {
+        const res = await axios.get("http://localhost:5000/api/auth/update-profile", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -19,8 +19,8 @@ const Shipmethod = ({ onContinue }) => {
 
         if (res.data) {
           setAddressData(res.data);
-          setContact(res.data.phone);
-          setAddr(res.data.address);
+          setContact(res.data.contact || "");
+          setAddr(res.data.address || "");
         }
       } catch (error) {
         console.log(error);
@@ -28,32 +28,76 @@ const Shipmethod = ({ onContinue }) => {
     };
 
     fetchAddress();
+  }, [addressData]);
+
+  const [data, setdata] = useState()
+    //const [ShowPayment, setShowPaymentState] = useState(true)
+    useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+  
+        const res = await fetch("http://localhost:5000/api/auth/me", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        if (!res.ok) throw new Error("Failed to fetch user");
+  
+        const data = await res.json();
+        console.log("Fetched user:", data);
+        setdata(data);
+  
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    fetchUser();
   }, []);
 
   // SAVE / UPDATE ADDRESS
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await axios.post(
-        "/api/address",
-        {
-          phone: contact,
-          address: addr,
-        },
-        {
+      try {
+        await axios.put("http://localhost:5000/api/auth/update-profile", {
+           contact: contact,
+           address: addr,
+        }, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
-      );
+        });
+        onContinue();
+      } catch (error) {
+         console.log(error);
+      }
+    };
 
-      setAddressData(res.data);
-      onContinue(); // move to payment
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     const res = await axios.post(
+  //       "/api/address",
+  //       {
+  //         phone: contact,
+  //         address: addr,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
+
+  //     setAddressData(res.data);
+  //     onContinue(); // move to payment
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -69,12 +113,12 @@ const Shipmethod = ({ onContinue }) => {
             <div>
               <span className="fw-semibold">Contact:</span>
               <p className="mb-1 text-muted" style={{ fontSize: "14px" }}>
-                {addressData?.phone || "Not provided"}
+                {data?.contact || "Not provided"}
               </p>
 
               <input
                 type="text"
-                placeholder="Enter contact"
+                placeholder="New contact"
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 className="form-control"
@@ -89,11 +133,11 @@ const Shipmethod = ({ onContinue }) => {
             <div>
               <span className="fw-semibold">Ship to:</span>
               <p className="mb-1 text-muted" style={{ fontSize: "14px" }}>
-                {addressData?.address || "Not provided"}
+                {data?.address || "Not provided"}
               </p>
 
               <textarea
-                placeholder="Enter address"
+                placeholder="New address"
                 value={addr}
                 onChange={(e) => setAddr(e.target.value)}
                 className="form-control"
@@ -114,7 +158,20 @@ const Shipmethod = ({ onContinue }) => {
         </div>
 
         {/* CONTINUE BUTTON */}
-        <div className="text-center">
+        <div className="d-flex justify-content-between align-items-center">
+           <button
+            type="submit"
+            className="px-4 py-2 btn"
+            style={{
+              background: "#FF8A34",
+              color: "#fff",
+              borderRadius: "10px",
+              fontWeight: "600",
+            }}
+           onClick={()=>{setShowPayment(true)}}
+          >
+            previous Address 
+          </button>
           <button
             type="submit"
             className="px-4 py-2 btn"

@@ -2,13 +2,14 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const authMiddleware = require("../Controller/authmiddleware/authmiddleware");
 
 const router = express.Router();
 
 /* ================= SIGNUP ================= */
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, contact, address } = req.body;
 
     const userExists = await User.findOne({ email });
     if (userExists) {
@@ -20,7 +21,9 @@ router.post("/signup", async (req, res) => {
     const user = await User.create({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      contact,
+      address
     });
 
     res.status(201).json({ message: "User registered successfully" });
@@ -28,6 +31,33 @@ router.post("/signup", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+
+/* ================= UPDATE PROFILE ================= */
+router.put("/update-profile", authMiddleware, async (req, res) => {
+  try {
+    const { contact, address } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { contact, address },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({
+      message: "Profile updated successfully",
+      user,
+    });
+  } catch (err) {
+    console.error("UPDATE PROFILE ERROR:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 /* ================= LOGIN ================= */
 router.post("/login", async (req, res) => {
@@ -49,5 +79,20 @@ router.post("/login", async (req, res) => {
 
   res.json({ token });
 });
+
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 module.exports = router;

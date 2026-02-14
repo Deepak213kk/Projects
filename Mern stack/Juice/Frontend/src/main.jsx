@@ -8,13 +8,12 @@ import AuthProvider from './component/context/AuthContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+
+    
     <AuthProvider>
       <CartProvider>
-
         <App />
       </CartProvider>
     </AuthProvider>
-
-
   </StrictMode>
 )

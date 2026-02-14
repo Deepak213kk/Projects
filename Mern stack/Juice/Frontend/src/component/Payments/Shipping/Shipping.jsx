@@ -13,22 +13,22 @@ const Shipping = () => {
   return (
     <>
       <Labelfile />
-      <div class="container">
-        <div class="row">
+      <div className="container">
+        <div className="flex-wrap row d-flex" style={{ minHeight: '80vh' }}>
 
           {/* LEFT DIV */}
-          <div class="col-12 col-md-6">
-            <div class="p-3 bg-light">
+          <div className="col-12 col-md-6">
+            <div className="p-3 bg-light">
               <SummaryB />
             </div>
           </div>
 
           {/* RIGHT DIV */}
-          <div class="col-12 col-md-6">
-            <div class="p-3 bg-light">
+          <div className="col-12 col-md-6">
+            <div className="p-3 bg-light">
               {!showPayment
-                ? <Shipmethod onContinue={() => setShowPayment(true)} />
-                : <Paymentmethod />
+                ? <Shipmethod onContinue={() => setShowPayment(true)} setShowPayment={setShowPayment} />
+                : <Paymentmethod setShowPayment={setShowPayment} />
               }
 
             </div>

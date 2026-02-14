@@ -1,37 +1,67 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const Paymentmethod = () => {
-    return (
-          <div className="p-3 bg-white min-vh-100 w-100 d-flex justify-content-center p-md-4">
+const Paymentmethod = ({ setShowPayment }) => {
+  const [data, setdata] = useState()
+  //const [ShowPayment, setShowPaymentState] = useState(true)
+  useEffect(() => {
+  const fetchUser = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch("http://localhost:5000/api/auth/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error("Failed to fetch user");
+
+      const data = await res.json();
+      console.log("Fetched user:", data);
+      setdata(data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchUser();
+}, []);
+
+
+
+  return (
+    <div className="p-3 bg-white min-vh-100 w-100 d-flex justify-content-center p-md-4">
 
       {/* 50% width on desktop */}
       <div className="mx-auto w-100" style={{ maxWidth: "600px" }}>
 
         {/* Contact & Shipping */}
         <div className="p-4 mb-4 border rounded" style={{ background: "#FFF9C4", borderColor: "#64B5F6" }}>
-          
+
           <div className="mb-3 d-flex justify-content-between small">
             <div>
               <p className="mb-1 fw-semibold">Contact:</p>
-              <p className="mb-0">omkarkoli7412@gmail.com</p>
+              <p className="mb-0">{data?.contact || "plz provide contact"}</p>
             </div>
-            <button className="p-0 btn btn-link">Change</button>
+            <button className="p-0 btn btn-link" onClick={()=>{setShowPayment(false)}} >Change</button>
           </div>
 
           <div className="d-flex justify-content-between small">
             <div>
               <p className="mb-1 fw-semibold">Ship to:</p>
               <p className="mb-0">
-                Mumbai, maharashtra, chembur camp, 400074<br />
-                Mumbai MH, India
+                {data?.address || "plz provide address"}
               </p>
             </div>
-            <button className="p-0 btn btn-link">Change</button>
+            <button className="p-0 btn btn-link" onClick={()=>{setShowPayment(false)}} >Change</button>
           </div>
 
           <div className="mt-3 d-flex justify-content-between small">
             <p className="mb-0 fw-semibold">Shipping Method</p>
-            <p className="mb-0">Standard — ₹100</p>
+            <p className="mb-0">Standard — ₹50</p>
           </div>
 
         </div>
@@ -42,12 +72,12 @@ const Paymentmethod = () => {
           <p className="mb-2 text-muted small">All transactions are secure and encrypted</p>
 
           <div className="gap-2 p-3 border rounded shadow-sm d-flex align-items-center">
-            <p className="mb-0 small fw-semibold">Cards, UPI, NB, Wallets, BNPL by PayU India</p>
+            <p className="mb-0 small fw-semibold">Cards, UPI and Wallets,India</p>
             <div className="gap-1 opacity-75 ms-auto small d-flex">
-              <span>VISA</span>
+              <span></span>
               <span>UPI</span>
               <span>PayPal</span>
-              <span>Mastercard</span>
+              <span></span>
             </div>
           </div>
         </div>
@@ -66,19 +96,20 @@ const Paymentmethod = () => {
             <label className="gap-2 p-3 d-flex align-items-center">
               <input type="radio" name="billing" />
               <span className="small">Use a different billing address</span>
+              <button className="underline cursor-pointer text-primary text-end" >change</button>
             </label>
           </div>
         </div>
 
         {/* Pay Button */}
         <button className="py-2 text-white btn w-100 fs-5 fw-semibold"
-                style={{ backgroundColor: "#FFA726" }}>
+          style={{ backgroundColor: "#FFA726" }}>
           Pay Now
         </button>
 
       </div>
     </div>
-    )
+  )
 }
 
 export default Paymentmethod

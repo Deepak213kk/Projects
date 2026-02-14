@@ -2,11 +2,16 @@ const Cart = require("../models/Cart");
 
 // GET CART
 exports.getCart = async (req, res) => {
-  const cart = await Cart.findOne({ userId: req.user.id })
-    .populate("items.productId");
+  try {
+    const cart = await Cart.findOne({ userId: req.user.id })
+      .populate("items.productId");
 
-  res.json(cart ? cart.items : []);
+    res.json(cart ? cart.items : []);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch cart" });
+  }
 };
+
 
 // ADD TO CART
 exports.addToCart = async (req, res) => {

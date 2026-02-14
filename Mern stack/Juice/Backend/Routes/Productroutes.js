@@ -27,6 +27,16 @@ router.post("/", upload.single("image"), async (req, res) => {
       price: req.body.price,
       description: req.body.description,
       image: req.file.path, // Cloudinary URL
+      ingredients: req.body.ingredients
+        ? req.body.ingredients.split(",").map(i => i.trim())
+        : [],
+
+      nutrition: {
+        calories: req.body.nutrition?.calories,
+        sugar: req.body.nutrition?.sugar,
+        carbs: req.body.nutrition?.carbs,
+        vitaminC: req.body.nutrition?.vitaminC,
+      }
     });
 
     res.status(201).json(product);

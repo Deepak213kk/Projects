@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Login.css"; // reuse same CSS + font
-import Signupanimation from "../Animation/Signupanimation"
-import { useState } from "react";
+import "./signup.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-//import signupimg from "../../assets/Signupimg.png"
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
+
   const submit = async (e) => {
     e.preventDefault();
 
@@ -25,49 +24,68 @@ export default function Signup() {
       alert("Signup successful");
       navigate("/");
     } catch (error) {
-      console.log("SIGNUP ERROR:", error.response?.data);
       alert(error.response?.data?.message || "Signup failed");
     }
   };
 
   return (
-    <div className="container-fluid vh-100 juice-bg">
-      <div className="row h-100">
+    <div className="signup-bg d-flex justify-content-center align-items-center vh-100">
+      <div className="p-4 signup-card">
 
-        {/* LEFT SIDE - REGISTER FORM */}
-        <div className="col-md-5 d-flex align-items-center justify-content-center">
-          <div className="p-4 shadow-lg card juice-card w-100" style={{ maxWidth: "420px" }}>
+        {/* Logo */}
+        <div className="mb-4 text-center">
+          <div className="logo-icon">🍹</div>
+          <h2 className="fw-bold brand-text">Juice Veda</h2>
+          <p className="text-muted small">Fresh • Healthy • Natural</p>
+        </div>
 
-            {/* Logo */}
-            <div className="mb-4 text-center">
-              <div className="juice-icon">🍊</div>
-              <h2 className="fw-bold text-orange">Create Account</h2>
-              <p className="text-muted small">Join Juice Veda today</p>
-            </div>
+        {/* Form */}
+        <form onSubmit={submit}>
 
-            {/* Form */}
-            <form onSubmit={submit}>
-              <h2>Signup</h2>
-              <input placeholder="Name" onChange={e => setName(e.target.value)} />
-              <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-              <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-              <button type="submit" >Register</button>
-            </form>
-
-            <p className="mt-4 text-center small">
-              Already have an account?
-              <Link to="/login" className="ms-2 text-orange fw-semibold">
-                Login
-              </Link>
-            </p>
+          <div className="mb-3 form-floating">
+            <input
+              type="text"
+              className="form-control input-modern"
+              placeholder="Full Name"
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <label>Full Name</label>
           </div>
-        </div>
 
-        {/* RIGHT SIDE - BLANK (FOR FUTURE USE) */}
-        <div className="col-md-7 d-none d-md-block ">
-          <Signupanimation />
-        </div>
+          <div className="mb-3 form-floating">
+            <input
+              type="email"
+              className="form-control input-modern"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label>Email address</label>
+          </div>
 
+          <div className="mb-4 form-floating">
+            <input
+              type="password"
+              className="form-control input-modern"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <label>Password</label>
+          </div>
+
+          <button className="btn btn-modern w-100">
+            Create Account
+          </button>
+        </form>
+
+        <p className="mt-4 text-center small">
+          Already have an account?{" "}
+          <Link to="/login" className="login-link">
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );

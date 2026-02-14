@@ -7,9 +7,8 @@ import Footer from '../Footer2/Footer'
 const Footer1 = () => {
     return (
         <>
-        <div className='navbar'>
             <Navbar />
-        </div>
+        
             <div className='text-white main-about d-flex flex-column justify-content-center align-items-center '>
               <div className='hero-img'>
                 <img src={heroImg} alt=""  />

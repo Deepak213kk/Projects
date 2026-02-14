@@ -4,7 +4,7 @@ const User = require('../models/User.js');
 
 exports.signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, contact, address } = req.body;
     console.log("SIGNUP BODY:", req.body);
 
     // 1️⃣ Check existing user
@@ -21,6 +21,8 @@ exports.signup = async (req, res) => {
       name,
       email: email.toLowerCase().trim(),
       password: hashedPassword,
+      contact,
+      address,
     });
 
     await user.save();
@@ -60,4 +62,22 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: "Login mistake" });
   }
 };
+exports.updateProfile = async (req, res) => {
+  try {
+    const { contact, address } = req.body;
 
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { contact, address },
+      { new: true }
+    );
+
+    res.json({
+      message: "Profile updated successfully",
+      user,
+    });
+  } catch (err) {
+    console.error("UPDATE PROFILE ERROR:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
