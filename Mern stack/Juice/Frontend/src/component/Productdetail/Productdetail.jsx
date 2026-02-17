@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import './Productdetail.css'
-import ScrollBar from '../Scroll Bar/ScrollBar'
-import Mosambi from '../../assets/MOsambi.png'
+import ScrollBar from '../scrollbar/ScrollBar.jsx'
+//import Mosambi from '../../assets/MOsambi.png'
 //import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 //import product from '../Data/Data.jsx';

@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../Navbar'
 import Hero from '../HeroPage.jsx/Hero'
-import ScrollBar from '../Scroll Bar/ScrollBar'
+import ScrollBar from '../scrollbar/ScrollBar'
 import Feedback from '../Feedback/Feedback'
 import Footer1 from '../Footer/About'
 import Footer from '../Footer2/Footer'
