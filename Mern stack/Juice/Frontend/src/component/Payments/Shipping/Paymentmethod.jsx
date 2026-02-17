@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { CartContext } from '../../context/CartContext';
 
-const Paymentmethod = ({ setShowPayment }) => {
+const Paymentmethod = ({ setShowPayment, finalAmount }) => {
+    const { cart } = useContext(CartContext)
   const [data, setdata] = useState()
+  console.log("Cart in Paymentmethod:", cart);
+  console.log("Final Amount in Paymentmethod:", finalAmount);
+  console.log("Cart Context in Paymentmethod:", data);
   //const [ShowPayment, setShowPaymentState] = useState(true)
   useEffect(() => {
   const fetchUser = async () => {
@@ -30,6 +35,43 @@ const Paymentmethod = ({ setShowPayment }) => {
   fetchUser();
 }, []);
 
+const handlePayment = async () => {
+  const res = await fetch("/create-order", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      amount: finalAmount,
+      items: cart,
+      user: data,
+    }),
+  });
+
+  const order = await res.json();
+
+  const options = {
+    key: "YOUR_KEY_ID",
+    amount: order.amount,
+    currency: "INR",
+    name: "Juice Shop",
+    description: "Juice Payment",
+    order_id: order.id,
+
+    handler: async function (response) {
+      await fetch("/verify-payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(response),
+      });
+
+      alert("Payment Successful 🎉");
+    },
+  };
+
+  const rzp = new window.Razorpay(options);
+  rzp.open();
+};
 
 
   return (
@@ -103,7 +145,7 @@ const Paymentmethod = ({ setShowPayment }) => {
 
         {/* Pay Button */}
         <button className="py-2 text-white btn w-100 fs-5 fw-semibold"
-          style={{ backgroundColor: "#FFA726" }}>
+          style={{ backgroundColor: "#FFA726" }} onClick={()=>{handlePayment}}>
           Pay Now
         </button>
 

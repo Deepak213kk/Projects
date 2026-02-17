@@ -31,12 +31,12 @@ const Shipmethod = ({ onContinue, setShowPayment }) => {
   }, [addressData]);
 
   const [data, setdata] = useState()
-    //const [ShowPayment, setShowPaymentState] = useState(true)
-    useEffect(() => {
+  //const [ShowPayment, setShowPaymentState] = useState(true)
+  useEffect(() => {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
-  
+
         const res = await fetch("http://localhost:5000/api/auth/me", {
           method: "GET",
           headers: {
@@ -44,18 +44,18 @@ const Shipmethod = ({ onContinue, setShowPayment }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-  
+
         if (!res.ok) throw new Error("Failed to fetch user");
-  
+
         const data = await res.json();
-        console.log("Fetched user:", data);
+        // console.log("Fetched user:", data);
         setdata(data);
-  
+
       } catch (err) {
         console.error(err);
       }
     };
-  
+
     fetchUser();
   }, []);
 
@@ -63,20 +63,20 @@ const Shipmethod = ({ onContinue, setShowPayment }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      try {
-        await axios.put("http://localhost:5000/api/auth/update-profile", {
-           contact: contact,
-           address: addr,
-        }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        onContinue();
-      } catch (error) {
-         console.log(error);
-      }
-    };
+    try {
+      await axios.put("http://localhost:5000/api/auth/update-profile", {
+        contact: contact,
+        address: addr,
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      onContinue();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   //   try {
   //     const res = await axios.post(
@@ -132,11 +132,10 @@ const Shipmethod = ({ onContinue, setShowPayment }) => {
           <div className="d-flex justify-content-between align-items-start">
             <div>
               <span className="fw-semibold">Ship to:</span>
+
               <p className="mb-1 text-muted" style={{ fontSize: "14px" }}>
                 {data?.address || "Not provided"}
-              </p>
-
-              <textarea
+              </p>              <textarea
                 placeholder="New address"
                 value={addr}
                 onChange={(e) => setAddr(e.target.value)}
@@ -154,12 +153,12 @@ const Shipmethod = ({ onContinue, setShowPayment }) => {
           style={{ background: "#D3F4CE", border: "1px solid #b2e3a5" }}
         >
           <span>Standard</span>
-          <span className="fw-semibold">₹100</span>
+          <span className="fw-semibold">₹50</span>
         </div>
 
         {/* CONTINUE BUTTON */}
         <div className="d-flex justify-content-between align-items-center">
-           <button
+          <button
             type="submit"
             className="px-4 py-2 btn"
             style={{
@@ -168,9 +167,9 @@ const Shipmethod = ({ onContinue, setShowPayment }) => {
               borderRadius: "10px",
               fontWeight: "600",
             }}
-           onClick={()=>{setShowPayment(true)}}
+            onClick={() => { setShowPayment(true) }}
           >
-            previous Address 
+            previous Address
           </button>
           <button
             type="submit"

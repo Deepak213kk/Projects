@@ -9,7 +9,7 @@ import Paymentmethod from './Paymentmethod'
 
 const Shipping = () => {
   const [showPayment, setShowPayment] = useState(false);
-
+  const [finalamt, setfinalamt] = useState(0);
   return (
     <>
       <Labelfile />
@@ -19,7 +19,7 @@ const Shipping = () => {
           {/* LEFT DIV */}
           <div className="col-12 col-md-6">
             <div className="p-3 bg-light">
-              <SummaryB />
+              <SummaryB setfinalamt={setfinalamt} />
             </div>
           </div>
 
@@ -28,7 +28,7 @@ const Shipping = () => {
             <div className="p-3 bg-light">
               {!showPayment
                 ? <Shipmethod onContinue={() => setShowPayment(true)} setShowPayment={setShowPayment} />
-                : <Paymentmethod setShowPayment={setShowPayment} />
+                : <Paymentmethod setShowPayment={setShowPayment} finalAmount={finalamt} />
               }
 
             </div>

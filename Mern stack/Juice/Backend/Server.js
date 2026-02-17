@@ -21,6 +21,30 @@ app.use("/api/auth", require("./Routes/auth"));
 app.use("/api/cart", require("./Routes/Cartroutes"));
 app.use("/api/products", require("./Routes/Productroutes"));
 
+// Razorpay1
+app.post("/create-order", async (req, res) => {
+  const { amount, items, user } = req.body;
+
+  const options = {
+    amount: amount * 100, // ₹220 → 22000
+    currency: "INR",
+    receipt: "receipt_123",
+  };
+
+  const order = await razorpay.orders.create(options);
+
+  // save in DB
+  const newOrder = await Order.create({
+    orderId: order.id,
+    amount: options.amount,
+    items,
+    user,
+  });
+
+  res.json(order);
+});
+
+
 // Test protected route
 const authMiddleware = require("./Controller/authmiddleware/authmiddleware");
 

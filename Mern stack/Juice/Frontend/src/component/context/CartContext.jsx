@@ -9,8 +9,10 @@ const API_URL = "http://localhost:5000/api";
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const [cartTotal, setCartTotal] = useState(0);
+  const [total, settotal] = useState(0)
 
   const [token, setToken] = useState(localStorage.getItem("token"));
+
 
   // 🔹 Fetch Cart
   const fetchCart = useCallback(async () => {
@@ -73,6 +75,37 @@ export function CartProvider({ children }) {
 
     fetchCart();
   };
+  //discount code
+  const [discount, setDiscount] = useState(0);
+  const [promocode, setPromocode] = useState("");
+
+  // ✅ Load from localStorage on refresh
+  useEffect(() => {
+    const savedDiscount = localStorage.getItem("discount");
+    const savedCode = localStorage.getItem("promocode");
+
+    if (savedDiscount) setDiscount(Number(savedDiscount));
+    if (savedCode) setPromocode(savedCode);
+  }, []);
+
+  // ✅ Save to localStorage
+  useEffect(() => {
+    localStorage.setItem("discount", discount);
+    localStorage.setItem("promocode", promocode);
+  }, [discount, promocode]);
+
+  const Handlediscount = (e, Totalmrp) => {
+    e.preventDefault();
+
+    if (promocode === "JUICE100") {
+      setDiscount(100);
+    } else if (promocode === "JUICE10") {
+      setDiscount(Totalmrp * 0.1);
+    } else {
+      setDiscount(0);
+      alert("Invalid Promocode");
+    }
+  };
 
   // 🔹 Increase quantity
   const quantityIncrease = async (productId) => {
@@ -87,7 +120,6 @@ export function CartProvider({ children }) {
 
     fetchCart();
   };
-
   // 🔹 Decrease quantity
   const quantityDecrease = async (productId) => {
     await fetch(`${API_URL}/cart/decrease`, {
@@ -138,6 +170,13 @@ export function CartProvider({ children }) {
         quantityIncrease,
         quantityDecrease,
         clearCart,
+        total,
+        settotal,
+        discount,
+        setDiscount,
+        promocode,
+        setPromocode,
+        Handlediscount,
       }}
     >
       {children}
