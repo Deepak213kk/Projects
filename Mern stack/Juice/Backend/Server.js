@@ -8,15 +8,24 @@ dotenv.config();
 const app = express();
 
 // Middleware
-console.log(process.env.CLOUD_NAME);
-
+//console.log(process.env.CLOUD_NAME);
+app.use(express.json());
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://projects-one-silk.vercel.app"
-  ],
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (
+      origin.includes("vercel.app") ||
+      origin.includes("localhost")
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
+
 
 // Routes
 app.use("/api/auth", require("./Routes/auth"));

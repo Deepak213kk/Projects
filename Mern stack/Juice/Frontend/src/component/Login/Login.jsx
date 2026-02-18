@@ -28,7 +28,7 @@ export default function Login() {
 //     }
 //   };
 
-  const loginfunction = async () => {
+  const loginfunction = async (event) => {
    event.preventDefault();
 
   if (!Email || !Password) {
