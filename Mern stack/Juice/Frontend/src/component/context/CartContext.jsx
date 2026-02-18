@@ -4,7 +4,7 @@ import { cartReducer, initialState } from "../reducer/cartReducer";
 
 export const CartContext = createContext();
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://projects-1-7puw.onrender.com/api"; // Update with your backend URL
 
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);

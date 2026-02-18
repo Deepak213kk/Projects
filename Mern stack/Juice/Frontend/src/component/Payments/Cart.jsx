@@ -26,7 +26,7 @@ const Cart = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const res = await fetch("http://localhost:5000/api/cart", {
+      const res = await fetch("https://projects-1-7puw.onrender.com/api/cart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -11,7 +11,7 @@ const Shipmethod = ({ onContinue, setShowPayment }) => {
   useEffect(() => {
     const fetchAddress = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/update-profile", {
+        const res = await axios.get("https://projects-1-7puw.onrender.com/api/auth/update-profile", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -37,7 +37,7 @@ const Shipmethod = ({ onContinue, setShowPayment }) => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:5000/api/auth/me", {
+        const res = await fetch("https://projects-1-7puw.onrender.com/api/auth/me", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

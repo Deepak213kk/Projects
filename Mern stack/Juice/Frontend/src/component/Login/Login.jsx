@@ -38,7 +38,7 @@ export default function Login() {
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      "https://projects-1-7puw.onrender.com/api/auth/login",
       {
         email: Email.trim(),
         password: Password.trim(),
