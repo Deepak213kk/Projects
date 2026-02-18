@@ -11,10 +11,12 @@ const app = express();
 console.log(process.env.CLOUD_NAME);
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://projects-one-silk.vercel.app"
+  ],
   credentials: true
 }));
-app.use(express.json());
 
 // Routes
 app.use("/api/auth", require("./Routes/auth"));
