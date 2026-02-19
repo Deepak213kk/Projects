@@ -56,7 +56,7 @@ const handlePayment = async () => {
     description: "Juice Payment",
     order_id: order.id,
 
-    handler: async function (response) {
+    handler: async function (response) {  
       await fetch("https://projects-1-7puw.onrender.com/verify-payment", {
         method: "POST",
         headers: {
@@ -145,7 +145,7 @@ const handlePayment = async () => {
 
         {/* Pay Button */}
         <button className="py-2 text-white btn w-100 fs-5 fw-semibold"
-          style={{ backgroundColor: "#FFA726" }} onClick={()=>{handlePayment}}>
+          style={{ backgroundColor: "#FFA726" }} onClick={handlePayment}>
           Pay Now
         </button>
 
