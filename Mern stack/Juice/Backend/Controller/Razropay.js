@@ -1,3 +1,41 @@
+
+const crypto = require("crypto");
+
+app.post("/verify-payment", async (req, res) => {
+  const {
+    razorpay_order_id,
+    razorpay_payment_id,
+    razorpay_signature,
+  } = req.body;
+
+  const body = razorpay_order_id + "|" + razorpay_payment_id;
+
+  const expectedSignature = crypto
+    .createHmac("sha256", "YOUR_KEY_SECRET")
+    .update(body)
+    .digest("hex");
+
+  if (expectedSignature === razorpay_signature) {
+    // ✅ Save payment
+    await Payment.create({
+      paymentId: razorpay_payment_id,
+      orderId: razorpay_order_id,
+      signature: razorpay_signature,
+      status: "success",
+    });
+
+    // ✅ Update order
+    await Order.findOneAndUpdate(
+      { orderId: razorpay_order_id },
+      { status: "paid" }
+    );
+
+    res.json({ success: true });
+  } else {
+    res.status(400).json({ success: false });
+  }
+});
+
 app.post("/create-order", async (req, res) => {
   const { amount, items, user } = req.body;
 

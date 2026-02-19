@@ -11,8 +11,14 @@ export function CartProvider({ children }) {
   const [cartTotal, setCartTotal] = useState(0);
   const [total, settotal] = useState(0)
 
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState("");
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   // 🔹 Fetch Cart
   const fetchCart = useCallback(async () => {
@@ -142,21 +148,21 @@ export function CartProvider({ children }) {
   };
 
   // 🔹 Calculate total
- useEffect(() => {
-  const total = state.cart.reduce(
-    (sum, item) =>
-      sum + (item?.productId?.price || 0) * (item?.quantity || 0),
-    0
-  );
+  useEffect(() => {
+    const total = state.cart.reduce(
+      (sum, item) =>
+        sum + (item?.productId?.price || 0) * (item?.quantity || 0),
+      0
+    );
 
-  setCartTotal(total);
-}, [state.cart]);
+    setCartTotal(total);
+  }, [state.cart]);
 
 
 
   useEffect(() => {
-  fetchCart();
-}, [fetchCart]);
+    fetchCart();
+  }, [fetchCart]);
 
 
 

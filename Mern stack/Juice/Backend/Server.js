@@ -1,8 +1,11 @@
 const express = require("express");
+const Razorpay = require("razorpay");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const db = require("./Config/Db");
-
+const crypto = require("crypto");
+const Order = require("./models/Order");
+const Payment = require("./models/Payment");
 dotenv.config();
 
 const app = express();
@@ -25,7 +28,11 @@ app.use(cors({
   },
   credentials: true
 }));
-
+// Razorpay instance
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
 
 // Routes
 app.use("/api/auth", require("./Routes/auth"));
@@ -34,25 +41,69 @@ app.use("/api/products", require("./Routes/Productroutes"));
 
 // Razorpay1
 app.post("/create-order", async (req, res) => {
-  const { amount, items, user } = req.body;
+  try {
+    const { amount, items, user } = req.body;
 
-  const options = {
-    amount: amount * 100, // ₹220 → 22000
-    currency: "INR",
-    receipt: "receipt_123",
-  };
+    const options = {
+      amount: amount * 100,
+      currency: "INR",
+      receipt: "receipt_" + Date.now(),
+    };
 
-  const order = await razorpay.orders.create(options);
+    const order = await razorpay.orders.create(options);
 
-  // save in DB
-  const newOrder = await Order.create({
-    orderId: order.id,
-    amount: options.amount,
-    items,
-    user,
-  });
+    await Order.create({
+      orderId: order.id,
+      amount: options.amount,
+      items,
+      user,
+    });
 
-  res.json(order);
+    res.json(order);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+app.post("/verify-payment", async (req, res) => {
+  try {
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+    } = req.body;
+
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
+
+    const expectedSignature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+      .update(body)
+      .digest("hex");
+
+    if (expectedSignature === razorpay_signature) {
+
+      // ✅ Save payment
+      await Payment.create({
+        paymentId: razorpay_payment_id,
+        orderId: razorpay_order_id,
+        signature: razorpay_signature,
+        status: "success",
+      });
+
+      // ✅ Update order
+      await Order.findOneAndUpdate(
+        { orderId: razorpay_order_id },
+        { status: "paid" }
+      );
+
+      res.json({ success: true });
+
+    } else {
+      res.status(400).json({ success: false });
+    }
+
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 

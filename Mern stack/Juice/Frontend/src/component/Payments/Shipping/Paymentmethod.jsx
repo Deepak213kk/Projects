@@ -13,7 +13,7 @@ const Paymentmethod = ({ setShowPayment, finalAmount }) => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5000/api/auth/me", {
+      const res = await fetch("https://projects-1-7puw.onrender.com/api/auth/me", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const Paymentmethod = ({ setShowPayment, finalAmount }) => {
 }, []);
 
 const handlePayment = async () => {
-  const res = await fetch("/create-order", {
+  const res = await fetch("https://projects-1-7puw.onrender.com/create-order", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -49,7 +49,7 @@ const handlePayment = async () => {
   const order = await res.json();
 
   const options = {
-    key: "YOUR_KEY_ID",
+    key: "rzp_live_SHt0qh9qqcY9Wi", // Enter the Key ID generated from the Dashboard
     amount: order.amount,
     currency: "INR",
     name: "Juice Shop",
@@ -57,7 +57,7 @@ const handlePayment = async () => {
     order_id: order.id,
 
     handler: async function (response) {
-      await fetch("/verify-payment", {
+      await fetch("https://projects-1-7puw.onrender.com/verify-payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
