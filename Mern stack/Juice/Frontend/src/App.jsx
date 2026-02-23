@@ -44,6 +44,7 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/refund" element={<Refund />} />
+          <Route path="/cancel" element={<Cancellation />} />
           <Route path="/summary" element={<SummaryB />} />
 
 
