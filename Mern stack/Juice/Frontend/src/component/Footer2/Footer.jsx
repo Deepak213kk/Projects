@@ -62,9 +62,9 @@ const Footer = () => {
             <li>Our Story</li>
             <li>Careers</li>
             
-            <Link  >  <li>Terms</li> </Link>
-            <Link>  <li>Privacy</li> </Link>
-            <Link>  <li>Refund</li> </Link>
+            <Link to="/terms" className="text-decoration-none" style={{color: 'inherit'}}>   <li>Terms</li> </Link>
+            <Link to="/privacy" className="text-decoration-none" style={{color: 'inherit'}}>  <li>Privacy</li> </Link>
+            <Link to="/refund" className="text-decoration-none" style={{color: 'inherit'}}>  <li>Refund</li> </Link>
           </ul>
         </div>
 
