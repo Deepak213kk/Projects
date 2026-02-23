@@ -21,6 +21,7 @@ import Home from './component/Homepage/Home'
 import Login from './component/Login/Login.jsx';
 import Signup from './component/Login/Signup.jsx'
 import Paymentmethod from './component/Payments/Shipping/Paymentmethod.jsx'
+import Terms, { Privacy, Refund } from './component/Payments/policy/Policy.jsx'
 
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
           <Route path="/shipmethod" element={<Shipmethod />} />
           <Route path="/Payment" element={<Paymentmethod />} />
           <Route path="/shipping" element={<Shipping />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/refund" element={<Refund />} />
           <Route path="/summary" element={<SummaryB />} />
 
 

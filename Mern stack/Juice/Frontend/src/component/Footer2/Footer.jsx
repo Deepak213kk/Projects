@@ -1,5 +1,7 @@
 import React from 'react'
 import './Footer.css'
+import { Link } from "react-router-dom";
+
 import logo from '../../assets/Logo.png'
 const Footer = () => {
   return (
@@ -59,6 +61,10 @@ const Footer = () => {
           <ul className='text-decoration-underline'>
             <li>Our Story</li>
             <li>Careers</li>
+            
+            <Link  >  <li>Terms</li> </Link>
+            <Link>  <li>Privacy</li> </Link>
+            <Link>  <li>Refund</li> </Link>
           </ul>
         </div>
 
