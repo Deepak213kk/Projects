@@ -43,6 +43,7 @@ const Footer = () => {
             <li>Juices</li>
             <li>Cleanse</li>
             <li>Ingredients</li>
+            <Link to="/cancel" className="text-decoration-none" style={{color: 'inherit'}}>  <li>Cancel</li> </Link>
           </ul>
         </div>
 

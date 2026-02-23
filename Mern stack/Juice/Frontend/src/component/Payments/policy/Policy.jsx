@@ -34,6 +34,43 @@ export const Terms = () => (
     <p>By placing an order, you accept these terms.</p>
   </PageLayout>
 );
+export const Cancellation = () => (
+  <PageLayout title="Cancellation Policy">
+    <p className="mb-4 text-muted">Last Updated: February 2026</p>
+
+    <p>
+      At <strong>Juice Veda</strong>, we aim to prepare and deliver fresh juices
+      as quickly as possible. Please review our cancellation policy below.
+    </p>
+
+    <h4 className="section-title">Order Cancellation</h4>
+    <p>
+      Orders can only be canceled before the preparation process has started.
+      Once preparation begins, cancellations will not be accepted as the
+      products are freshly made.
+    </p>
+
+    <h4 className="section-title">Cancellation Time Window</h4>
+    <p>
+      Customers are advised to cancel orders immediately after placing them.
+      Cancellation requests after a delay may not be processed.
+    </p>
+
+    <h4 className="section-title">Refund on Cancellation</h4>
+    <p>
+      If a cancellation is successfully made before preparation, the refund will
+      be processed to the original payment method within 5–7 business days.
+    </p>
+
+    <h4 className="section-title">Contact Information</h4>
+    <p>
+      Juice Veda <br />
+      Email: support@juiceveda.com <br />
+      Phone: +91 7208236401 <br />
+      Address: Sindhi Society pink corner, chembur,mumbai, Maharashtra, India
+    </p>
+  </PageLayout>
+);
 
 export const Privacy = () => (
   <PageLayout title="Privacy Policy">
