@@ -3,7 +3,7 @@ import menuImage from "../../assets/menu.jpg";
 import "./Menu.css";
 import Navbar from "../Navbar";
 import Footer from "../Footer2/Footer";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext.jsx";
 import Filter from "./Filter.jsx";
 
@@ -16,24 +16,21 @@ const Menu = () => {
 
   const navigate = useNavigate();
 
-  // 🔹 Fetch products from backend
- useEffect(() => {
-  const fetchProducts = async () => {
-    try {
-      const res = await fetch("https://projects-1-7puw.onrender.com/api/products");
-      if (!res.ok) throw new Error("Failed to fetch products");
-      const data = await res.json();
-      console.log("Fetched products:", data); // debug
-      setProducts(data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  fetchProducts();
-}, []);
+  // ✅ Fetch products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("https://projects-1-7puw.onrender.com/api/products");
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProducts();
+  }, []);
 
-console.log("Products state:", products); // debug
-
+  // ✅ Handlers
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -46,10 +43,12 @@ console.log("Products state:", products); // debug
     navigate(`/product/${id}`);
   };
 
-  // 🔹 Filter products
+  // ✅ Filtering logic
   const filteredProducts = products.filter((prod) => {
     const matchesSearch = prod.name.toLowerCase().includes(searchterm.toLowerCase());
-    const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(prod.category);
+    const matchesCategory =
+      selectedCategories.length === 0 ||
+      selectedCategories.includes(prod.category);
     const matchesPrice = prod.price <= priceRange;
 
     return matchesSearch && matchesCategory && matchesPrice;
@@ -58,15 +57,20 @@ console.log("Products state:", products); // debug
   return (
     <>
       <Navbar />
+
+      {/* ✅ Hero Section */}
       <div
         className="mt-3 hero-section"
-        style={{ backgroundImage: `url(${menuImage})`, opacity: 0.8 }}
+        style={{ backgroundImage: `url(${menuImage})` }}
       >
         <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <h1 className="hero-title">Juice <span>Veda</span></h1>
-          <div className="search-box">
-            <i className="bi bi-search"></i>
+
+        <div className="text-center hero-content">
+          <h1 className="hero-title">
+            Juice <span>Veda</span>
+          </h1>
+
+          <div className="mx-auto search-box">
             <input
               type="text"
               placeholder="Search Fruit Juice"
@@ -77,42 +81,90 @@ console.log("Products state:", products); // debug
         </div>
       </div>
 
-      <div className="container gap-5 mt-5 mb-5 menu-main d-flex">
-        <div className="left-side">
-          <Filter
-            selectedCategories={selectedCategories}
-            onCategoryChange={handleCategoryChange}
-            priceRange={priceRange}
-            onPriceChange={setPriceRange}
-          />
-        </div>
+      {/* ✅ Main Section */}
+      <div className="container mt-5 mb-5">
+        <div className="row">
 
-        <div className="right-side">
-          <div className="row g-4">
-            {filteredProducts.map((prod) => (
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={prod._id}>
-                <div className="product-card h-100">
-                  <div
-                    className="product-image"
-                    onClick={() => handleProductClick(prod._id)}
-                  >
-                    <img src={prod.image}  alt={prod.name} />
-                  </div>
+          {/* ✅ MOBILE FILTER BUTTON */}
+          <div className="mb-3 col-12 d-lg-none">
+            <button
+              className="btn btn-success w-100 rounded-pill"
+              data-bs-toggle="collapse"
+              data-bs-target="#mobileFilter"
+            >
+              Filter Juices
+            </button>
 
-                  <h3 className="product-title">{prod.name}</h3>
-                  <p className="product-desc">{prod.description}</p>
-                  <p className="product-price">₹{prod.price}</p>
-
-                  <button
-                    className="mt-auto add-btn"
-                    onClick={() => addToCart(prod._id)} // backend expects productId
-                  >
-                    Add to cart
-                  </button>
-                </div>
+            <div className="mt-3 collapse" id="mobileFilter">
+              <div className="p-3 shadow-sm card rounded-4">
+                <Filter
+                  selectedCategories={selectedCategories}
+                  onCategoryChange={handleCategoryChange}
+                  priceRange={priceRange}
+                  onPriceChange={setPriceRange}
+                />
               </div>
-            ))}
+            </div>
           </div>
+
+          {/* ✅ DESKTOP FILTER */}
+          <div className="col-lg-3 d-none d-lg-block">
+            <div className="p-3 shadow-sm card rounded-4">
+              <Filter
+                selectedCategories={selectedCategories}
+                onCategoryChange={handleCategoryChange}
+                priceRange={priceRange}
+                onPriceChange={setPriceRange}
+              />
+            </div>
+          </div>
+
+          {/* ✅ PRODUCTS */}
+          <div className="col-12 col-lg-9">
+            <div className="row g-4">
+              {filteredProducts.map((prod) => (
+                <div
+                  className="col-12 col-sm-6 col-md-4 col-lg-4"
+                  key={prod._id}
+                >
+                  <div className="border-0 shadow-sm card product-card h-100 rounded-4">
+
+                    <div
+                      className="product-image"
+                      onClick={() => handleProductClick(prod._id)}
+                    >
+                      <img
+                        src={prod.image}
+                        alt={prod.name}
+                        className="card-img-top rounded-top-4"
+                      />
+                    </div>
+
+                    <div className="card-body d-flex flex-column">
+                      <h5 className="fw-bold">{prod.name}</h5>
+
+                      <p className="text-muted small">
+                        {prod.description}
+                      </p>
+
+                      <h6 className="mt-auto fw-bold text-success">
+                        ₹{prod.price}
+                      </h6>
+
+                      <button
+                        className="mt-3 btn btn-warning w-100 rounded-pill"
+                        onClick={() => addToCart(prod._id)}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
 
