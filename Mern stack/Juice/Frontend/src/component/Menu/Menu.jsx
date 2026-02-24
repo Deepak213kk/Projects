@@ -3,7 +3,7 @@ import menuImage from "../../assets/menu.jpg";
 import "./Menu.css";
 import Navbar from "../Navbar";
 import Footer from "../Footer2/Footer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext.jsx";
 import Filter from "./Filter.jsx";
 
@@ -16,21 +16,24 @@ const Menu = () => {
 
   const navigate = useNavigate();
 
-  // ✅ Fetch products
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("https://projects-1-7puw.onrender.com/api/products");
-        const data = await res.json();
-        setProducts(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchProducts();
-  }, []);
+  // 🔹 Fetch products from backend
+ useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch("https://projects-1-7puw.onrender.com/api/products");
+      if (!res.ok) throw new Error("Failed to fetch products");
+      const data = await res.json();
+      console.log("Fetched products:", data); // debug
+      setProducts(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  fetchProducts();
+}, []);
 
-  // ✅ Handlers
+console.log("Products state:", products); // debug
+
   const handleCategoryChange = (category) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -43,12 +46,10 @@ const Menu = () => {
     navigate(`/product/${id}`);
   };
 
-  // ✅ Filtering logic
+  // 🔹 Filter products
   const filteredProducts = products.filter((prod) => {
     const matchesSearch = prod.name.toLowerCase().includes(searchterm.toLowerCase());
-    const matchesCategory =
-      selectedCategories.length === 0 ||
-      selectedCategories.includes(prod.category);
+    const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(prod.category);
     const matchesPrice = prod.price <= priceRange;
 
     return matchesSearch && matchesCategory && matchesPrice;
@@ -57,20 +58,15 @@ const Menu = () => {
   return (
     <>
       <Navbar />
-
-      {/* ✅ Hero Section */}
       <div
         className="mt-3 hero-section"
-        style={{ backgroundImage: `url(${menuImage})` }}
+        style={{ backgroundImage: `url(${menuImage})`, opacity: 0.8 }}
       >
         <div className="hero-overlay"></div>
-
-        <div className="text-center hero-content">
-          <h1 className="hero-title">
-            Juice <span>Veda</span>
-          </h1>
-
-          <div className="mx-auto search-box">
+        <div className="hero-content">
+          <h1 className="hero-title">Juice <span>Veda</span></h1>
+          <div className="search-box">
+            <i className="bi bi-search"></i>
             <input
               type="text"
               placeholder="Search Fruit Juice"
@@ -81,46 +77,17 @@ const Menu = () => {
         </div>
       </div>
 
-      {/* ✅ Main Section */}
-      <div className="container mt-5 mb-5">
-        <div className="row">
+      <div className="container gap-5 mt-5 mb-5 menu-main d-flex">
+        <div className="left-side">
+          <Filter
+            selectedCategories={selectedCategories}
+            onCategoryChange={handleCategoryChange}
+            priceRange={priceRange}
+            onPriceChange={setPriceRange}
+          />
+        </div>
 
-          {/* ✅ MOBILE FILTER BUTTON */}
-          <div className="mb-3 col-12 d-lg-none">
-            <button
-              className="btn btn-success w-100 rounded-pill"
-              data-bs-toggle="collapse"
-              data-bs-target="#mobileFilter"
-            >
-              Filter Juices
-            </button>
-
-            <div className="mt-3 collapse" id="mobileFilter">
-              <div className="p-3 shadow-sm card rounded-4">
-                <Filter
-                  selectedCategories={selectedCategories}
-                  onCategoryChange={handleCategoryChange}
-                  priceRange={priceRange}
-                  onPriceChange={setPriceRange}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* ✅ DESKTOP FILTER */}
-          <div className="col-lg-3 d-none d-lg-block">
-            <div className="p-3 shadow-sm card rounded-4">
-              <Filter
-                selectedCategories={selectedCategories}
-                onCategoryChange={handleCategoryChange}
-                priceRange={priceRange}
-                onPriceChange={setPriceRange}
-              />
-            </div>
-          </div>
-
-          {/* ✅ PRODUCTS */}
-          <div className="col-12 col-lg-9">
+         <div className="col-12 col-lg-9">
             <div className="row g-4">
               {filteredProducts.map((prod) => (
                 <div
@@ -164,8 +131,6 @@ const Menu = () => {
               ))}
             </div>
           </div>
-
-        </div>
       </div>
 
       <Footer />
