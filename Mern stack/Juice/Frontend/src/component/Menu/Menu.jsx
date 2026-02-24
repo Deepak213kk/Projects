@@ -87,50 +87,33 @@ console.log("Products state:", products); // debug
           />
         </div>
 
-         <div className="col-12 col-lg-9">
-            <div className="row g-4">
-              {filteredProducts.map((prod) => (
-                <div
-                  className="col-12 col-sm-6 col-md-4 col-lg-4"
-                  key={prod._id}
-                >
-                  <div className="border-0 shadow-sm card product-card h-100 rounded-4">
-
-                    <div
-                      className="product-image"
-                      onClick={() => handleProductClick(prod._id)}
-                    >
-                      <img
-                        src={prod.image}
-                        alt={prod.name}
-                        className="card-img-top rounded-top-4"
-                      />
-                    </div>
-
-                    <div className="card-body d-flex flex-column">
-                      <h5 className="fw-bold">{prod.name}</h5>
-
-                      <p className="text-muted small">
-                        {prod.description}
-                      </p>
-
-                      <h6 className="mt-auto fw-bold text-success">
-                        ₹{prod.price}
-                      </h6>
-
-                      <button
-                        className="mt-3 btn btn-warning w-100 rounded-pill"
-                        onClick={() => addToCart(prod._id)}
-                      >
-                        Add to cart
-                      </button>
-                    </div>
-
+        <div className="right-side">
+          <div className="row g-4">
+            {filteredProducts.map((prod) => (
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={prod._id}>
+                <div className="product-card h-100">
+                  <div
+                    className="product-image"
+                    onClick={() => handleProductClick(prod._id)}
+                  >
+                    <img src={prod.image}  alt={prod.name} />
                   </div>
+
+                  <h3 className="product-title">{prod.name}</h3>
+                  <p className="product-desc">{prod.description}</p>
+                  <p className="product-price">₹{prod.price}</p>
+
+                  <button
+                    className="mt-auto add-btn"
+                    onClick={() => addToCart(prod._id)} // backend expects productId
+                  >
+                    Add to cart
+                  </button>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
+        </div>
       </div>
 
       <Footer />
