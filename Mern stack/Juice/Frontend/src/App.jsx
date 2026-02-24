@@ -21,7 +21,7 @@ import Home from './component/Homepage/Home'
 import Login from './component/Login/Login.jsx';
 import Signup from './component/Login/Signup.jsx'
 import Paymentmethod from './component/Payments/Shipping/Paymentmethod.jsx'
-import Terms, { Privacy, Refund } from './component/Payments/policy/Policy.jsx'
+import Terms, { Cancellation, Privacy, Refund } from './component/Payments/policy/Policy.jsx'
 
 
 function App() {
