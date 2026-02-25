@@ -2,76 +2,84 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/CartContext';
 
 const Paymentmethod = ({ setShowPayment, finalAmount }) => {
-    const { cart } = useContext(CartContext)
+  const { cart } = useContext(CartContext)
   const [data, setdata] = useState()
   console.log("Cart in Paymentmethod:", cart);
   console.log("Final Amount in Paymentmethod:", finalAmount);
   console.log("Cart Context in Paymentmethod:", data);
   //const [ShowPayment, setShowPaymentState] = useState(true)
   useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const token = localStorage.getItem("token");
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
 
-      const res = await fetch("https://projects-1-7puw.onrender.com/api/auth/me", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const res = await fetch("https://projects-1-7puw.onrender.com/api/auth/me", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      if (!res.ok) throw new Error("Failed to fetch user");
+        if (!res.ok) throw new Error("Failed to fetch user");
 
-      const data = await res.json();
-      console.log("Fetched user:", data);
-      setdata(data);
+        const data = await res.json();
+        console.log("Fetched user:", data);
+        setdata(data);
 
-    } catch (err) {
-      console.error(err);
-    }
-  };
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-  fetchUser();
-}, []);
+    fetchUser();
+  }, []);
 
-const handlePayment = async () => {
-  const res = await fetch("https://projects-1-7puw.onrender.com/create-order", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      amount: finalAmount,
-      items: cart,
-      user: data,
-    }),
-  });
+  const handlePayment = async () => {
+    const res = await fetch("https://projects-1-7puw.onrender.com/create-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: finalAmount,
+        items: cart,
+        user: data,
+      }),
+    });
 
-  const order = await res.json();
+    const order = await res.json();
 
-  const options = {
-    key: "rzp_live_SHt0qh9qqcY9Wi", // Enter the Key ID generated from the Dashboard
-    amount: order.amount,
-    currency: "INR",
-    name: "Juice Shop",
-    description: "Juice Payment",
-    order_id: order.id,
-
-    handler: async function (response) {  
-      await fetch("https://projects-1-7puw.onrender.com/verify-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(response),
-      });
-
-      alert("Payment Successful 🎉");
+    const options = {
+      key: "rzp_live_SHt0qh9qqcY9Wi", // Enter the Key ID generated from the Dashboard
+      amount: order.amount,
+      currency: "INR",
+      name: "Juice Shop",
+      description: "Juice Payment",
+      order_id: order.id,
+      method: {
+        upi: true,
+        card: true,
+        netbanking: true,
+        wallet: true
+      },
+      upi: {
+      flow: "intent"
     },
-  };
+      handler: async function (response) {
+        await fetch("https://projects-1-7puw.onrender.com/verify-payment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(response),
+        });
 
-  const rzp = new window.Razorpay(options);
-  rzp.open();
-};
+        alert("Payment Successful 🎉");
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
 
 
   return (
@@ -88,7 +96,7 @@ const handlePayment = async () => {
               <p className="mb-1 fw-semibold">Contact:</p>
               <p className="mb-0">{data?.contact || "plz provide contact"}</p>
             </div>
-            <button className="p-0 btn btn-link" onClick={()=>{setShowPayment(false)}} >Change</button>
+            <button className="p-0 btn btn-link" onClick={() => { setShowPayment(false) }} >Change</button>
           </div>
 
           <div className="d-flex justify-content-between small">
@@ -98,7 +106,7 @@ const handlePayment = async () => {
                 {data?.address || "plz provide address"}
               </p>
             </div>
-            <button className="p-0 btn btn-link" onClick={()=>{setShowPayment(false)}} >Change</button>
+            <button className="p-0 btn btn-link" onClick={() => { setShowPayment(false) }} >Change</button>
           </div>
 
           <div className="mt-3 d-flex justify-content-between small">
