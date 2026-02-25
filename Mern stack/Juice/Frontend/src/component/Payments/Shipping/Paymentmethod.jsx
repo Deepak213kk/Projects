@@ -62,7 +62,7 @@ const Paymentmethod = ({ setShowPayment, finalAmount }) => {
         wallet: true
       },
       upi: {
-      flow: "intent"
+      flow: window.innerWidth < 768 ? "intent" : "collect"
     },
       handler: async function (response) {
         await fetch("https://projects-1-7puw.onrender.com/verify-payment", {
