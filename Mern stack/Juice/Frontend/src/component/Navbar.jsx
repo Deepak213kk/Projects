@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -32,7 +32,7 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <ul className="flex-row gap-4 navbar-nav d-none d-lg-flex">
         <li className="nav-item"><Link className="nav-link" to="/home">Home</Link></li>
-        <li className="nav-item"><Link className="nav-link" to="/menu">Shop</Link></li>
+        <li className="nav-item"><Link className="nav-link" to="/">Shop</Link></li>
         <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
         <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
       </ul>
