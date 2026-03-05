@@ -7,6 +7,7 @@ import "./navbar.css";
 
 const Navbar = () => {
   const token = localStorage.getItem("token");
+  const isLoggedIn = localStorage.getItem("token");
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -46,12 +47,24 @@ const Navbar = () => {
         </Link>
 
         {/* Logout (desktop only) */}
-        <button
-          className="btn btn-danger d-none d-lg-block"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+        {isLoggedIn ? (
+          <button
+            className="btn btn-danger d-none d-lg-block"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        ) : (
+          <>
+            <button className="btn btn-primary me-2 d-none d-lg-block">
+              Login
+            </button>
+
+            <button className="btn btn-success d-none d-lg-block">
+              Signup
+            </button>
+          </>
+        )}
 
         {/* Hamburger (mobile only) */}
         <button
