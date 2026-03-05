@@ -32,10 +32,10 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/" element={<Menu />} />
+          <Route path="/menu" element={<Menu />} />
           <Route path="/product/:id" element={<Productdetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/shipmethod" element={<Shipmethod />} />

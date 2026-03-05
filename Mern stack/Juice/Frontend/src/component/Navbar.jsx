@@ -28,10 +28,10 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <ul className="flex-row gap-4 navbar-nav d-none d-lg-flex">
         <li className="nav-item">
-          <Link className="nav-link" to="/home">Home</Link>
+          <Link className="nav-link" to="/">Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/">Shop</Link>
+          <Link className="nav-link" to="/menu">Shop</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/about">About</Link>
