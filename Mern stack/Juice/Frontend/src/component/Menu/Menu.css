@@ -10,7 +10,8 @@
   justify-content: center;
   padding: 20px;
   overflow: hidden;
-  position: relative;}
+  position: relative;
+}
 
 /* Main Content */
 .hero-content {
@@ -19,6 +20,7 @@
   text-align: center;
   color: white;
 }
+
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -33,7 +35,7 @@
   font-size: clamp(2rem, 10vw, 10rem);
   font-weight: 600;
   letter-spacing: 3px;
-   font-family: "Krona One", sans-serif;
+  font-family: "Krona One", sans-serif;
   /* BIGGER + RESPONSIVE word spacing */
   word-spacing: clamp(10rem, 22vw, 22rem);
 }
@@ -64,14 +66,17 @@
   color: #fff;
 
 }
+
 .option {
   display: flex;
   align-items: center;
 }
+
 .product-card {
-   width: 100%;
-  max-width: 230px;   /* looks same on desktop */
-  margin: 0 auto; 
+  width: 100%;
+  max-width: 230px;
+  /* looks same on desktop */
+  margin: 0 auto;
   padding: 15px;
   border-radius: 15px;
   background: #fff;
@@ -128,28 +133,38 @@
 .search-box input::placeholder {
   color: #fff;
   opacity: 0.8;
-  }
+}
 
 /* Responsive */
 @media (max-width: 576px) {
   .hero-section {
     height: 45vh;
   }
+
   .search-box {
     width: 90%;
   }
 }
-.left-side{
-  width: 25%;
-  
+
+.left-side {
+  width: 30%;
+
 }
-.right-side{
+
+.right-side {
   width: 70%;
 }
+
 @media (max-width: 480px) {
 
+  .product-title {
+    display: block;
+    margin: 0 auto;
+  }
+
   .product-card {
-    max-width: 90%;      /* fits mobile while looking same */
+    max-width: 90%;
+    /* fits mobile while looking same */
     padding: 12px;
     display: flex;
     flex-wrap: wrap;
@@ -157,24 +172,26 @@
 
   .product-title {
     font-size: 8px;
-         /* slightly smaller but same style */
+    /* slightly smaller but same style */
     width: 4rem;
   }
 
   .product-desc {
-    font-size: 5px;
-    width: 3rem ;
+    font-size: 3px;
+    width: 10rem;
   }
 
   .product-price {
-    font-size: 8px;
-    
+    font-size: 18px;
+
   }
 
   .add-btn {
     padding: 11px;
-    font-size: 8px;
-    width: 3rem;
+    font-size: 10px;
+    width: 7rem;
+    display: block;
+    margin: 0 auto;
   }
 }
 
@@ -213,5 +230,5 @@
 .product-price {
   font-weight: 600;
   color: #2e7d32;
-  
+
 }
