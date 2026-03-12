@@ -50,8 +50,11 @@ export default function Login() {
     localStorage.setItem("token", res.data.token);
 
     alert("Login successful!");
-
-    navigate("/home");  // go to home page
+     if (res.data.role === "admin") {
+      navigate("/dashboard");
+  } else {
+        navigate("/");  // go to home page
+  }
   } catch (error) {
     console.log("ERROR RESPONSE:", error.response?.data);
     alert(error.response?.data?.message || "Login Failed");

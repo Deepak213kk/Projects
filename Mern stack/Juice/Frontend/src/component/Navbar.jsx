@@ -45,6 +45,8 @@ const Navbar = () => {
       <div className="gap-3 d-flex align-items-center ms-auto">
 
         {/* Cart */}
+        {/* edit for admin dashboard link
+        <Link to={"/dashboard"}> Admin</Link> */}
         <Link to="/cart" className="text-dark fs-5">
           <FaShoppingCart />
         </Link>

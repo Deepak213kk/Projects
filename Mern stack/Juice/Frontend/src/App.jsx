@@ -22,6 +22,7 @@ import Login from './component/Login/Login.jsx';
 import Signup from './component/Login/Signup.jsx'
 import Paymentmethod from './component/Payments/Shipping/Paymentmethod.jsx'
 import Terms, { Cancellation, Privacy, Refund } from './component/Payments/policy/Policy.jsx'
+import Dashboard from './component/Admin/Dashboard.jsx'
 
 
 function App() {
@@ -46,8 +47,7 @@ function App() {
           <Route path="/refund" element={<Refund />} />
           <Route path="/cancel" element={<Cancellation />} />
           <Route path="/summary" element={<SummaryB />} />
-
-
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </>

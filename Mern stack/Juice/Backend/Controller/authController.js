@@ -23,11 +23,15 @@ exports.signup = async (req, res) => {
       password: hashedPassword,
       contact,
       address,
+      role: "user"
     });
 
     await user.save();
 
-    res.status(201).json({ message: "Signup successful" });
+    res.status(201).json({
+      message: "Signup successful",
+      user
+    });
   } catch (error) {
     console.error("SIGNUP ERROR:", error);
     res.status(500).json({ message: "Signup failed" });
@@ -54,8 +58,13 @@ exports.login = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ message: "Login successful", token });
-    
+    res.status(200).json({ message: "Login successful", token }); res.status(200).json({
+      message: "Login successful",
+      token,
+      role: exist.role,
+      userId: exist._id
+    });
+
 
   } catch (error) {
     console.error("LOGIN ERROR:", error);
