@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import Navbar from "../Navbar";
+
+
+
+
 
 function AdminDashboard() {
     const handleLogout = () => {
@@ -7,7 +12,24 @@ function AdminDashboard() {
     console.log("Logged out successfully");
     Navigate("/login");
   };
+  const [orderdetail, setorderdetail] = useState([]);
+   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("https://projects-1-7puw.onrender.com/api/orders");
+        if (!res.ok) throw new Error("Failed to fetch orders");
+        const data = await res.json();
+        console.log("Fetched orders:", data); // debug
+        setorderdetail(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProducts();
+  }, []);
   return (
+    <>
+    <Navbar/>
     <div className="container-fluid">
       <div className="row">
 
@@ -21,7 +43,7 @@ function AdminDashboard() {
             </li>
 
             <li className="mb-2 nav-item">
-              <a className="nav-link text-dark" href="#">Orders</a>
+              <a className="nav-link text-dark" href="#">Orders {orderdetail}</a>
             </li>
 
             <li className="mb-2 nav-item">
@@ -53,7 +75,7 @@ function AdminDashboard() {
               <div className="text-white card bg-warning">
                 <div className="card-body">
                   <h6>Total Orders</h6>
-                  <h3>245</h3>
+                  <h3>{orderdetail.length}</h3>
                 </div>
               </div>
             </div>
@@ -108,16 +130,20 @@ function AdminDashboard() {
 
                 <tbody>
 
-                  <tr>
-                    <td>#1025</td>
-                    <td>Amit</td>
-                    <td>₹450</td>
-                    <td>
-                      <span className="badge bg-warning">Pending</span>
+                  {orderdetail.map((order) => (
+                    <tr>
+                      <td>{order.orderId}</td>
+                      <td>{order.user.name}</td>
+                      <td>₹{order.amount / 100}</td>
+                      <td>
+                      <span className="badge bg-warning">{order.status}</span>
                     </td>
-                  </tr>
+                  </tr>))
+                  }
+                
+                 
 
-                  <tr>
+                  {/* <tr>
                     <td>#1024</td>
                     <td>Priya</td>
                     <td>₹950</td>
@@ -133,7 +159,7 @@ function AdminDashboard() {
                     <td>
                       <span className="badge bg-primary">Processing</span>
                     </td>
-                  </tr>
+                  </tr> */}
 
                 </tbody>
               </table>
@@ -145,7 +171,9 @@ function AdminDashboard() {
         </div>
       </div>
     </div>
+    </>
   );
+  
 }
 
 export default AdminDashboard;

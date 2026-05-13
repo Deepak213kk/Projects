@@ -38,7 +38,7 @@ const razorpay = new Razorpay({
 app.use("/api/auth", require("./Routes/auth"));
 app.use("/api/cart", require("./Routes/Cartroutes"));
 app.use("/api/products", require("./Routes/Productroutes"));
-
+app.use("/api/orders", require("./Routes/OrderRoutes"));
 // Razorpay1
 app.post("/create-order", async (req, res) => {
   try {

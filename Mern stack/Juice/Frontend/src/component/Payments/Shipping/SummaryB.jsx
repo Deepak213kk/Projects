@@ -4,7 +4,7 @@ import { CartContext } from '../../context/CartContext';
 const SummaryB = ({ setfinalamt }) => {
   const { cart, total, discount } = useContext(CartContext);
 
-  const shipping = 50;
+  const shipping = 5;
 
   // ✅ calculate cart total
   const carttotal = cart.reduce(

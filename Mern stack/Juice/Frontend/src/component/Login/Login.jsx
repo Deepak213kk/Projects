@@ -28,6 +28,8 @@ export default function Login() {
 //     }
 //   };
 
+
+
   const loginfunction = async (event) => {
    event.preventDefault();
 
@@ -48,12 +50,16 @@ export default function Login() {
     login(res.data.token);
 
     localStorage.setItem("token", res.data.token);
+    const roledata = localStorage.getItem("Admin");
 
     alert("Login successful!");
-     if (res.data.role === "admin") {
+    console.log("LOGIN RESPONSE:", res.data);
+     if (roledata === "true") {
       navigate("/dashboard");
+      console.log("Admin user logged in, navigating to dashboard");
   } else {
-        navigate("/");  // go to home page
+        navigate("/");
+        console.log("Regular user logged in, navigating to home page");
   }
   } catch (error) {
     console.log("ERROR RESPONSE:", error.response?.data);

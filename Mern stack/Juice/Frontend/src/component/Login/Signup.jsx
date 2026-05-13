@@ -8,21 +8,40 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminKey, setAdminKey] = useState("");
 
   const navigate = useNavigate();
 
   const submit = async (e) => {
     e.preventDefault();
+    console.log(isAdmin)
 
+
+    if (isAdmin && adminKey !== "JuiceVedaAdmin@2000") {
+      alert("Invalid admin key. Please contact support.");
+      
+      return;
+    }
+    
+    console.log({
+      name: name.trim(),
+      email: email.trim(),
+      password: password.trim(),
+      role: isAdmin ? "admin" : "user"
+    });
+     localStorage.setItem("Admin", isAdmin);
     try {
       await axios.post("https://projects-1-7puw.onrender.com/api/auth/signup", {
         name: name.trim(),
         email: email.trim(),
         password: password.trim(),
+        role: isAdmin ? "admin" : "user"
       });
 
       alert("Signup successful");
-      navigate("/");
+      navigate("/login");
+
     } catch (error) {
       alert(error.response?.data?.message || "Signup failed");
     }
@@ -74,6 +93,27 @@ export default function Signup() {
             />
             <label>Password</label>
           </div>
+          <input type="checkbox" id="terms" checked={isAdmin} className="form-check-input" onChange={(e) => { setIsAdmin(e.target.checked) }} />
+          <label className="mx-2 mb-3 form-check-label" htmlFor="terms">
+            Register as Admin
+          </label>
+          {isAdmin && (
+            <div className="mb-3 form-floating">
+              <input
+                type="text"
+                className="form-control input-modern"
+                placeholder="Admin Secret Key"
+                value={adminKey}
+                onChange={(e) => setAdminKey(e.target.value)}
+                required
+              />
+              <label>Admin Secret Key</label>
+              <small className="text-center text-muted ">
+                Only authorized admins should have this key.
+              </small>
+            </div>
+
+          )}
 
           <button className="btn btn-modern w-100">
             Create Account

@@ -9,13 +9,13 @@ const router = express.Router();
 /* ================= SIGNUP ================= */
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email, password, contact, address } = req.body;
+    const { name, email, password, contact, address, role } = req.body;
 
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
-
+    const roleToSave = role === "admin" ? "admin" : "user";
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
@@ -23,13 +23,16 @@ router.post("/signup", async (req, res) => {
       email,
       password: hashedPassword,
       contact,
-      address
+      address,
+      role: roleToSave
     });
 
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Signup error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
+
 });
 
 
@@ -83,7 +86,7 @@ router.post("/login", async (req, res) => {
 router.get("/me", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

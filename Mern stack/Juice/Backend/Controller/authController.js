@@ -4,7 +4,7 @@ const User = require('../models/User.js');
 
 exports.signup = async (req, res) => {
   try {
-    const { name, email, password, contact, address } = req.body;
+    const { name, email, password, contact, address , role} = req.body;
     console.log("SIGNUP BODY:", req.body);
 
     // 1️⃣ Check existing user
@@ -23,7 +23,7 @@ exports.signup = async (req, res) => {
       password: hashedPassword,
       contact,
       address,
-      role: "user"
+      role
     });
 
     await user.save();
