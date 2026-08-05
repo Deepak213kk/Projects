@@ -3,7 +3,6 @@ import './App.css'
 import Feedback from './component/Feedback/Feedback'
 import About from './component/Footer/About'
 import Offer from './component/offer/Offer'
-
 import Footer from './component/Footer2/Footer'
 import Menu from './component/Menu/Menu'
 import Productdetail from './component/Productdetail/Productdetail'
@@ -23,6 +22,7 @@ import Signup from './component/Login/Signup.jsx'
 import Paymentmethod from './component/Payments/Shipping/Paymentmethod.jsx'
 import Terms, { Cancellation, Privacy, Refund } from './component/Payments/policy/Policy.jsx'
 import Dashboard from './component/Admin/Dashboard.jsx'
+import AddProduct from './component/Productdetail/Addproduct.jsx'
 
 
 function App() {
@@ -48,6 +48,7 @@ function App() {
           <Route path="/cancel" element={<Cancellation />} />
           <Route path="/summary" element={<SummaryB />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/add-product" element={<AddProduct />} />
         </Routes>
       </Router>
     </>

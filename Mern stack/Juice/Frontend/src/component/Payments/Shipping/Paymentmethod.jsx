@@ -62,18 +62,27 @@ const Paymentmethod = ({ setShowPayment, finalAmount }) => {
         wallet: true
       },
       upi: {
-      flow: window.innerWidth < 768 ? "intent" : "collect"
-    },
+        flow: window.innerWidth < 768 ? "intent" : "collect"
+      },
       handler: async function (response) {
-        await fetch("https://projects-1-7puw.onrender.com/verify-payment", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(response),
-        });
+        const res = await fetch(
+          "https://projects-1-7puw.onrender.com/verify-payment",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(response),
+          }
+        );
 
-        alert("Payment Successful 🎉");
+        const result = await res.json();
+
+        if (result.success) {
+          alert("Payment Successful 🎉");
+        } else {
+          alert("Payment Verification Failed");
+        }
       },
     };
 

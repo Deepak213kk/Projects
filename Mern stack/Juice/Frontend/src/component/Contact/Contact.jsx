@@ -4,6 +4,7 @@ import { IoMail, IoLocationSharp } from "react-icons/io5";
 import { FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 import Navbar from '../Navbar';
 import Footer from '../Footer2/Footer';
+import './Contact.css'
 const Contact = () => {
     return (
         <>

@@ -1,0 +1,186 @@
+body {
+    background: #f4f6f9;
+}
+
+/* Main Card */
+
+.add-product-card {
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    overflow: hidden;
+}
+
+/* Header */
+
+.add-product-header {
+    background: linear-gradient(90deg, #ffb703, #fb8500);
+    color: white;
+    padding: 20px 30px;
+}
+
+.add-product-header h2 {
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Section */
+
+.form-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.05);
+}
+
+.form-section h5 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #444;
+}
+
+/* Inputs */
+
+.form-control,
+.form-select {
+
+    border-radius: 10px;
+    padding: 12px;
+
+    transition: .3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color: #ff9800;
+
+    box-shadow: 0 0 0 .2rem rgba(255,152,0,.25);
+}
+
+/* Upload */
+
+.upload-box {
+
+    border: 2px dashed #ced4da;
+
+    border-radius: 15px;
+
+    padding: 40px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    text-align: center;
+
+    background: #fafafa;
+}
+
+.upload-box:hover {
+
+    border-color: #ff9800;
+
+    background: #fff9f1;
+}
+
+.upload-box img {
+
+    width: 180px;
+
+    height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 15px;
+
+    margin-bottom: 15px;
+}
+
+/* Ingredient Row */
+
+.ingredient-row {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+/* Buttons */
+
+.btn-add {
+
+    background: #28a745;
+
+    color: white;
+}
+
+.btn-add:hover {
+
+    background: #218838;
+}
+
+.btn-remove {
+
+    width: 45px;
+}
+
+.submit-btn {
+
+    background: linear-gradient(90deg,#ff9800,#ff5722);
+
+    color: white;
+
+    border: none;
+
+    padding: 12px;
+
+    font-size: 18px;
+
+    border-radius: 10px;
+
+    transition: .3s;
+}
+
+.submit-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(0,0,0,.15);
+}
+
+/* Success */
+
+.alert {
+
+    border-radius: 12px;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.upload-box{
+
+padding:25px;
+
+}
+
+.upload-box img{
+
+width:120px;
+
+height:120px;
+
+}
+
+.form-section{
+
+padding:18px;
+
+}
+
+}

@@ -30,6 +30,21 @@ app.post("/verify-payment", async (req, res) => {
       { status: "paid" }
     );
 
+    //send email to user
+    await transporter.sendMail({
+    from: process.env.EMAIL,
+    to: process.env.EMAIL,
+    subject: "🛒 New Paid Order",
+    html: `
+      <h2>Payment Successful 🎉</h2>
+
+      <p>A new order has been placed.</p>
+
+      <p><b>Order ID:</b> ${req.body.razorpay_order_id}</p>
+      <p><b>Payment ID:</b> ${req.body.razorpay_payment_id}</p>
+    `,
+  });
+
     res.json({ success: true });
   } else {
     res.status(400).json({ success: false });
