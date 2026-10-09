@@ -156,6 +156,7 @@ function AdminDashboard() {
                         <th>Customer</th>
                         <th>Amount</th>
                         <th>Status</th>
+                        <th>Payment Method</th>
                       </tr>
                     </thead>
 
@@ -183,6 +184,7 @@ function AdminDashboard() {
                                 {order.status}
                               </span>
                             </td>
+                            <td>{order.paymentMethod || "Online"}</td>
                           </tr>
                         ))
                       ) : (

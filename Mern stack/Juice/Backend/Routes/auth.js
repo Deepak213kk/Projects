@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const authMiddleware = require("../Controller/authmiddleware/authmiddleware");
+const { googleLogin } = require("../Controller/authController");
 
 const router = express.Router();
 
@@ -97,5 +98,7 @@ router.get("/me", authMiddleware, async (req, res) => {
   }
 });
 
+/* ================= GOOGLE LOGIN ================= */
+router.post("/google", googleLogin);
 
 module.exports = router;

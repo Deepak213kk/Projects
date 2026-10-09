@@ -36,58 +36,147 @@ const Paymentmethod = ({ setShowPayment, finalAmount }) => {
   }, []);
 
   const handlePayment = async () => {
-    const res = await fetch("https://projects-1-7puw.onrender.com/create-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: finalAmount,
-        items: cart,
-        user: data,
-      }),
-    });
+    // Check whether customer details have loaded
+    if (!data) {
+      alert("Please wait. Loading customer details...");
+      return;
+    }
 
-    const order = await res.json();
-
-    const options = {
-      key: "rzp_live_SHt0qh9qqcY9Wi", // Enter the Key ID generated from the Dashboard
-      amount: order.amount,
-      currency: "INR",
-      name: "Juice Shop",
-      description: "Juice Payment",
-      order_id: order.id,
-      method: {
-        upi: true,
-        card: true,
-        netbanking: true,
-        wallet: true
-      },
-      upi: {
-        flow: window.innerWidth < 768 ? "intent" : "collect"
-      },
-      handler: async function (response) {
-        const res = await fetch(
-          "https://projects-1-7puw.onrender.com/verify-payment",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(response),
-          }
-        );
-
-        const result = await res.json();
-
-        if (result.success) {
-          alert("Payment Successful 🎉");
-        } else {
-          alert("Payment Verification Failed");
-        }
-      },
+    // Prepare only the customer details needed for delivery
+    const customer = {
+      name: data.name || data.user?.name || "",
+      contact: data.contact || data.phone || data.user?.contact || "",
+      address: data.address || data.user?.address || "",
     };
 
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+    // Prevent orders without delivery information
+    if (!customer.name || !customer.contact || !customer.address) {
+      alert(
+        "Please update your name, phone number, and delivery address before placing your order."
+      );
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        "https://projects-1-7puw.onrender.com/create-order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            amount: finalAmount,
+            items: cart,
+            user: customer,
+          }),
+        }
+      );
+
+      const order = await res.json();
+
+      if (!res.ok || !order.id) {
+        throw new Error(order.message || "Could not create order");
+      }
+
+      const options = {
+        key: "rzp_live_SHt0qh9qqcY9Wi",
+        amount: order.amount,
+        currency: "INR",
+        name: "Juice Veda",
+        description: "Juice Payment",
+        order_id: order.id,
+
+        method: {
+          upi: true,
+          card: true,
+          netbanking: true,
+          wallet: true,
+        },
+
+        upi: {
+          flow: window.innerWidth < 768 ? "intent" : "collect",
+        },
+
+        handler: async function (response) {
+          try {
+            const verifyRes = await fetch(
+              "https://projects-1-7puw.onrender.com/verify-payment",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(response),
+              }
+            );
+
+            const result = await verifyRes.json();
+
+            if (verifyRes.ok && result.success) {
+              alert("Payment Successful 🎉");
+            } else {
+              alert("Payment verification failed.");
+            }
+          } catch (error) {
+            console.error("Payment verification error:", error);
+            alert("Unable to verify payment. Please contact support.");
+          }
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error("Order creation error:", error);
+      alert(error.message || "Unable to create order. Please try again.");
+    }
+  };
+  const handleCashOnDelivery = async () => {
+    if (!data) {
+      alert("Please wait for customer details to load.");
+      return;
+    }
+
+    const customer = {
+      name: data.name || data.user?.name || "",
+      contact: data.contact || data.phone || data.user?.contact || "",
+      address: data.address || data.user?.address || "",
+    };
+
+    if (!customer.name || !customer.contact || !customer.address) {
+      alert("Please provide your name, phone number, and delivery address.");
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        "https://projects-1-7puw.onrender.com/create-cod-order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            amount: finalAmount,
+            items: cart,
+            user: customer,
+          }),
+        }
+      );
+
+      const result = await res.json();
+
+      if (!res.ok || !result.success) {
+        throw new Error(result.message || "Could not place order.");
+      }
+
+      alert("Order placed successfully! Pay when your order is delivered.");
+    } catch (error) {
+      console.error("COD error:", error);
+      alert(error.message || "Could not place your order. Please try again.");
+    }
   };
 
 
@@ -164,6 +253,13 @@ const Paymentmethod = ({ setShowPayment, finalAmount }) => {
         <button className="py-2 text-white btn w-100 fs-5 fw-semibold"
           style={{ backgroundColor: "#FFA726" }} onClick={handlePayment}>
           Pay Now
+        </button>
+        <button
+          type="button"
+          className="py-2 mt-3 btn btn-outline-success w-100 fs-5 fw-semibold"
+          onClick={handleCashOnDelivery}
+        >
+          Cash on Delivery
         </button>
 
       </div>

@@ -1,72 +1,95 @@
-import React, { useState } from "react";
+
+import React, { useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.css";
-import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
-import { useContext } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const navigate = useNavigate();
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  //const { clearCart, setCartFromDB } = useContext(CartContext);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
   const { login } = useContext(AuthContext);
-//  const handleLogin = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await axios.post("http://localhost:5000/api/auth/login", {
-//         Email,
-//         Password
-//       });
-
-//       login(res.data.token);
-//       navigate("/", { replace: true });
-//     } catch (error) {
-//       alert(error.response?.data?.message || "Login failed");
-//     }
-//   };
-
-
 
   const loginfunction = async (event) => {
-   event.preventDefault();
+    event.preventDefault();
 
-  if (!Email || !Password) {
-    alert("Email and Password are required");
-    return;
-  }
+    if (!Email || !Password) {
+      alert("Email and Password are required");
+      return;
+    }
 
-  try {
-    const res = await axios.post(
-      "https://projects-1-7puw.onrender.com/api/auth/login",
-      {
-        email: Email.trim(),
-        password: Password.trim(),
-      }
-    );
+    try {
+      const res = await axios.post(
+        "https://projects-1-7puw.onrender.com/api/auth/login",
+        {
+          email: Email.trim(),
+          password: Password.trim(),
+        }
+      );
 
-    login(res.data.token);
+      login(res.data.token);
+      localStorage.setItem("token", res.data.token);
 
-    localStorage.setItem("token", res.data.token);
-    const roledata = localStorage.getItem("Admin");
+      alert("Login successful!");
 
-    alert("Login successful!");
-    console.log("LOGIN RESPONSE:", res.data);
-     if (roledata === "true") {
-      navigate("/dashboard");
-      console.log("Admin user logged in, navigating to dashboard");
-  } else {
+      const roledata = localStorage.getItem("Admin");
+
+      if (roledata === "true") {
+        navigate("/dashboard");
+      } else {
         navigate("/");
-        console.log("Regular user logged in, navigating to home page");
-  }
-  } catch (error) {
-    console.log("ERROR RESPONSE:", error.response?.data);
-    alert(error.response?.data?.message || "Login Failed");
-  }
-};
+      }
+    } catch (error) {
+      console.log("LOGIN ERROR:", error.response?.data);
+      alert(error.response?.data?.message || "Login failed");
+    }
+  };
 
+  const handleGoogleSuccess = async (credentialResponse) => {
+    if (!credentialResponse.credential) {
+      alert("Google sign-in did not return a credential. Please try again.");
+      return;
+    }
+
+    setGoogleLoading(true);
+
+    try {
+      const res = await axios.post(
+        "https://projects-1-7puw.onrender.com/api/auth/google",
+        {
+          credential: credentialResponse.credential,
+        }
+      );
+
+      if (!res.data.token) {
+        throw new Error("The server did not return an authentication token.");
+      }
+
+      login(res.data.token);
+      localStorage.setItem("token", res.data.token);
+
+      const roledata = localStorage.getItem("Admin");
+
+      if (roledata === "true") {
+        navigate("/dashboard", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
+    } catch (error) {
+      console.error("GOOGLE LOGIN ERROR:", error.response?.data || error);
+      alert(
+        error.response?.data?.message ||
+          "Google login failed. Please try again."
+      );
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
 
   return (
     <div className="px-3 juice-bg d-flex align-items-center justify-content-center flex-column vh-100">
@@ -85,6 +108,8 @@ export default function Login() {
               value={Email}
               className="form-control rounded-pill"
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              required
             />
           </div>
 
@@ -95,6 +120,8 @@ export default function Login() {
               value={Password}
               className="form-control rounded-pill"
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              required
             />
           </div>
 
@@ -106,7 +133,30 @@ export default function Login() {
           </button>
         </form>
 
-        <p className="mt-4 text-center small">
+        <div className="gap-2 my-3 d-flex align-items-center">
+          <hr className="flex-grow-1" />
+          <span className="text-muted small">OR</span>
+          <hr className="flex-grow-1" />
+        </div>
+
+        <div className="d-flex justify-content-center">
+          {googleLoading ? (
+            <button className="btn btn-light w-100" disabled>
+              Signing in with Google...
+            </button>
+          ) : (
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => alert("Google sign-in was unsuccessful.")}
+              text="continue_with"
+              shape="pill"
+              theme="outline"
+              width="280"
+            />
+          )}
+        </div>
+
+        <p className="mt-4 mb-0 text-center small">
           New here?
           <span
             className="mx-2 text-orange fw-semibold"

@@ -5,6 +5,12 @@ const orderSchema = new mongoose.Schema({
   amount: Number, // 22000 (in paise)
   currency: { type: String, default: "INR" },
   status: { type: String, default: "created" },
+   paymentMethod: {
+  type: String,
+  enum: ["Online", "COD"],
+  default: "Online",
+},
+
 
   items: [
     {
@@ -20,6 +26,7 @@ const orderSchema = new mongoose.Schema({
     address: String,
   },
 
+ 
 }, { timestamps: true });
 
 module.exports = mongoose.model("Order", orderSchema);

@@ -52,18 +52,38 @@ app.post("/create-order", async (req, res) => {
 
     const order = await razorpay.orders.create(options);
 
+
+    const Order = require("./models/Order");
+    const User = require("./models/User");
+
+    // Inside your existing /create-order route,
+    // after creating the Razorpay order:
+
+    const orderUser = {
+      name: user?.name || "",
+      contact: user?.contact || "",
+      address: user?.address || "",
+    };
+
     await Order.create({
       orderId: order.id,
       amount: options.amount,
+      currency: "INR",
       items,
-      user,
+      user: {
+        name: user?.name || "",
+        contact: user?.contact || "",
+        address: user?.address || "",
+      },
     });
+
 
     res.json(order);
   } catch (err) {
     res.status(500).send(err);
   }
 });
+
 app.post("/verify-payment", async (req, res) => {
   try {
     const {
@@ -105,7 +125,51 @@ app.post("/verify-payment", async (req, res) => {
     res.status(500).send(err);
   }
 });
+// Create Cash on Delivery order
+app.post("/create-cod-order", async (req, res) => {
+  try {
+    const { amount, items, user } = req.body;
 
+    if (
+      !Number.isFinite(Number(amount)) ||
+      Number(amount) <= 0 ||
+      !Array.isArray(items) ||
+      items.length === 0 ||
+      !user?.name ||
+      !user?.contact ||
+      !user?.address
+    ) {
+      return res.status(400).json({
+        message: "Valid order items and customer details are required.",
+      });
+    }
+
+    const order = await Order.create({
+      orderId: `COD_${Date.now()}`,
+      amount: Math.round(Number(amount) * 100),
+      currency: "INR",
+      status: "Pending",
+      paymentMethod: "COD",
+      items,
+      user: {
+        name: user.name,
+        contact: user.contact,
+        address: user.address,
+      },
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Cash on Delivery order placed successfully!",
+      order,
+    });
+  } catch (err) {
+    console.error("COD order error:", err);
+    res.status(500).json({
+      message: "Unable to place COD order.",
+    });
+  }
+});
 
 // Test protected route
 const authMiddleware = require("./Controller/authmiddleware/authmiddleware");
