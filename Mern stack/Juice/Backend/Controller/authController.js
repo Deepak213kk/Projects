@@ -122,7 +122,7 @@ exports.googleLogin = async (req, res) => {
     const payload = ticket.getPayload();
 
     if (!payload || !payload.sub || !payload.email ||
-        payload.email_verified !== true) {
+      payload.email_verified !== true) {
       return res.status(401).json({
         message: "Google account verification failed"
       });
@@ -140,10 +140,19 @@ exports.googleLogin = async (req, res) => {
       const existingUser = await User.findOne({ email });
 
       if (existingUser) {
-        return res.status(409).json({
-          message:
-            "An account with this email already exists. Please log in using your existing method first."
+        existingUser.googleId = payload.sub;
+        await existingUser.save();
+        user = existingUser;
+      } else {
+        user = new User({
+          name: payload.name || email.split("@")[0],
+          email,
+          googleId: payload.sub,
+          password: null,
+          role: "user"
         });
+
+        await user.save();
       }
 
       // Create a new regular user account
