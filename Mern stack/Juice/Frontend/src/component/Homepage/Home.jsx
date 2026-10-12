@@ -6,22 +6,24 @@ import Feedback from '../Feedback/Feedback'
 import Footer1 from '../Footer/About'
 import Footer from '../Footer2/Footer'
 import Offer from '../offer/Offer'
+import Shop from '../Menu/Shop'
 
 const Home = () => {
   return (
     <>
     
     <Navbar />
-    <Hero />
+    {/* <Hero />
     <h3 className='p-5'>
         Feature Product
     </h3>
     <ScrollBar />
     <div className='mt-3 mb-3'>
         <Offer />
-    </div>
+    </div> */}
+    <Shop />
     
-    <Feedback />
+    {/* <Feedback /> */}
     <Footer />
     </>
   )

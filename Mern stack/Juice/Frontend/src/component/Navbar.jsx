@@ -87,8 +87,8 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="mobile-menu-bts d-lg-none">
-          <Link to="/home" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link to="/" onClick={() => setMenuOpen(false)}>Shop</Link>
+          <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to="/menu" onClick={() => setMenuOpen(false)}>Shop</Link>
           <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
           <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
 

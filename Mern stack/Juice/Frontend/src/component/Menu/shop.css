@@ -1,0 +1,659 @@
+
+:root {
+  --jv-green: #245b3b;
+  --jv-green-dark: #173d29;
+  --jv-orange: #f49a35;
+  --jv-cream: #fffaf0;
+  --jv-text: #252c25;
+  --jv-muted: #777d75;
+}
+
+.juice-veda-home {
+  color: var(--jv-text);
+  background: #fff;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  overflow: hidden;
+}
+
+.juice-veda-home button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.jv-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 76px 28px;
+}
+
+.jv-eyebrow {
+  color: #d77e24;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin-bottom: 13px;
+}
+
+/* HERO */
+
+.jv-hero {
+  position: relative;
+  min-height: 570px;
+  display: flex;
+  align-items: center;
+  background-image: var(--hero-image);
+  background-size: cover;
+  background-position: center;
+  background-color: #244c32;
+  isolation: isolate;
+}
+
+.jv-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(18, 48, 30, 0.94) 0%,
+      rgba(24, 57, 35, 0.83) 43%,
+      rgba(25, 49, 29, 0.15) 100%
+    );
+}
+
+.jv-hero-content {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 80px 28px;
+  color: #fff;
+}
+
+.jv-hero .jv-eyebrow {
+  color: #ffd49b;
+}
+
+.jv-hero h1 {
+  max-width: 680px;
+  margin: 0 0 20px;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.12;
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+
+.jv-hero h1 span {
+  color: #ffb85c;
+}
+
+.jv-hero-content > p {
+  max-width: 470px;
+  color: #f0f3ec;
+  font-size: 16px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.jv-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.jv-primary-button,
+.jv-whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.jv-primary-button {
+  color: #fff;
+  background: var(--jv-orange);
+  border: 1px solid var(--jv-orange);
+}
+
+.jv-primary-button:hover {
+  background: #df8120;
+  transform: translateY(-2px);
+}
+
+.jv-whatsapp-button {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.jv-whatsapp-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.jv-hero-note {
+  margin-top: 30px;
+  color: #f4e6d3;
+  font-size: 12px;
+}
+
+.jv-hero-note span {
+  color: #ffb85c;
+  margin-right: 7px;
+}
+
+/* SECTION HEADINGS */
+
+.jv-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.jv-section-heading h2,
+.jv-why-heading h2 {
+  font-size: clamp(27px, 3vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin: 0 0 12px;
+  font-weight: 800;
+  color: var(--jv-green-dark);
+}
+
+.jv-section-heading p,
+.jv-why-heading > p {
+  color: var(--jv-muted);
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.jv-text-link {
+  border: 0;
+  background: transparent;
+  color: var(--jv-green);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+
+.jv-text-link:hover {
+  color: #d77e24;
+}
+
+/* POPULAR CATEGORIES */
+
+.jv-categories {
+  padding-bottom: 48px;
+}
+
+.jv-category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.jv-category-card {
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
+  padding: 0;
+  border: 1px solid #eaece5;
+  border-radius: 16px;
+  background: #fff;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.jv-category-card:hover,
+.jv-category-card.active {
+  transform: translateY(-5px);
+  border-color: #8ba98f;
+  box-shadow: 0 12px 30px rgba(35, 77, 48, 0.1);
+}
+
+.jv-category-image {
+  height: 205px;
+  position: relative;
+  overflow: hidden;
+  background: var(--jv-cream);
+}
+
+.jv-category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.jv-category-card:hover .jv-category-image img {
+  transform: scale(1.05);
+}
+
+.jv-category-emoji {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 20px;
+  box-shadow: 0 3px 12px #00000012;
+}
+
+.jv-category-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 19px;
+  gap: 12px;
+}
+
+.jv-category-info h3 {
+  font-size: 18px;
+  font-weight: 750;
+  margin: 0 0 6px;
+}
+
+.jv-category-info p {
+  font-size: 12px;
+  color: var(--jv-muted);
+  margin: 0;
+}
+
+.jv-category-arrow {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--jv-green);
+  background: #eef5eb;
+  font-size: 18px;
+}
+
+/* FEATURED AND BESTSELLERS */
+
+.jv-featured {
+  max-width: none;
+  background: #f8faf5;
+  padding-left: max(28px, calc((100% - 1184px) / 2));
+  padding-right: max(28px, calc((100% - 1184px) / 2));
+}
+
+.jv-bestsellers {
+  padding-top: 76px;
+}
+
+.jv-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -4px 0 26px;
+}
+
+.jv-chip {
+  padding: 9px 18px;
+  border: 1px solid #e0e6dc;
+  border-radius: 30px;
+  background: #fff;
+  color: #4d594c;
+  font-size: 12px;
+  font-weight: 650;
+  transition: all 0.2s;
+}
+
+.jv-chip:hover,
+.jv-chip.active {
+  color: #fff;
+  border-color: var(--jv-green);
+  background: var(--jv-green);
+}
+
+.jv-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.jv-product-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #eceee8;
+  border-radius: 15px;
+  background: #fff;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.jv-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(29, 61, 37, 0.09);
+}
+
+.jv-product-image {
+  display: block;
+  width: 100%;
+  height: 205px;
+  padding: 0;
+  border: 0;
+  background: #f6f5ee;
+  overflow: hidden;
+}
+
+.jv-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.jv-product-card:hover .jv-product-image img {
+  transform: scale(1.05);
+}
+
+.jv-product-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px;
+}
+
+.jv-product-info h3 {
+  font-size: 16px;
+  line-height: 1.45;
+  margin: 0 0 8px;
+  font-weight: 750;
+  color: #263d2c;
+}
+
+.jv-product-description {
+  flex: 1;
+  min-height: 40px;
+  margin: 0 0 19px;
+  color: var(--jv-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.jv-product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.jv-product-price {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--jv-green);
+  white-space: nowrap;
+}
+
+.jv-add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 9px 13px;
+  border: 1px solid var(--jv-green);
+  border-radius: 8px;
+  color: #fff;
+  background: var(--jv-green);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.jv-add-button:hover {
+  background: var(--jv-green-dark);
+}
+
+.jv-add-button span {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.jv-bestsellers {
+  background: #fff;
+}
+
+.jv-bestseller-mark {
+  color: #a76019;
+  background: #fff3df;
+  border-radius: 25px;
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.jv-message {
+  padding: 25px 0;
+  color: var(--jv-muted);
+  font-size: 14px;
+}
+
+/* WHY CHOOSE JUICE VEDA */
+
+.jv-why {
+  padding: 76px 28px 85px;
+  background: #f3f6ed;
+}
+
+.jv-why-heading {
+  max-width: 620px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.jv-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 1184px;
+  margin: 0 auto;
+}
+
+.jv-benefit-card {
+  padding: 27px 22px;
+  border: 1px solid #e6ebdf;
+  border-radius: 14px;
+  background: #fff;
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.jv-benefit-card:hover {
+  transform: translateY(-4px);
+}
+
+.jv-benefit-icon {
+  display: grid;
+  place-items: center;
+  width: 49px;
+  height: 49px;
+  margin-bottom: 19px;
+  border-radius: 13px;
+  background: #edf5e8;
+  font-size: 24px;
+}
+
+.jv-benefit-card h3 {
+  margin: 0 0 10px;
+  color: var(--jv-green-dark);
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.jv-benefit-card p {
+  margin: 0;
+  color: var(--jv-muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .jv-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jv-benefit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jv-category-image {
+    height: 170px;
+  }
+
+  .jv-product-image {
+    height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .jv-section {
+    padding: 48px 18px;
+  }
+
+  .jv-hero {
+    min-height: 520px;
+    background-position: 62% center;
+  }
+
+  .jv-hero-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(18, 48, 30, 0.93),
+      rgba(18, 48, 30, 0.68)
+    );
+  }
+
+  .jv-hero-content {
+    padding: 65px 22px;
+  }
+
+  .jv-hero h1 {
+    font-size: 43px;
+    letter-spacing: -1.5px;
+  }
+
+  .jv-hero-content > p {
+    font-size: 14px;
+  }
+
+  .jv-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 290px;
+  }
+
+  .jv-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .jv-category-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .jv-category-card {
+    display: grid;
+    grid-template-columns: 115px minmax(0, 1fr);
+  }
+
+  .jv-category-image {
+    height: 115px;
+  }
+
+  .jv-category-info {
+    padding: 13px;
+  }
+
+  .jv-category-info h3 {
+    font-size: 16px;
+  }
+
+  .jv-category-info p {
+    font-size: 11px;
+  }
+
+  .jv-featured {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .jv-product-grid {
+    gap: 12px;
+  }
+
+  .jv-product-image {
+    height: 145px;
+  }
+
+  .jv-product-info {
+    padding: 12px;
+  }
+
+  .jv-product-info h3 {
+    font-size: 14px;
+  }
+
+  .jv-product-description {
+    font-size: 11px;
+    min-height: 38px;
+  }
+
+  .jv-product-price {
+    font-size: 16px;
+  }
+
+  .jv-add-button {
+    padding: 8px 9px;
+    font-size: 11px;
+  }
+
+  .jv-bestseller-mark {
+    white-space: normal;
+  }
+
+  .jv-why {
+    padding: 52px 18px;
+  }
+
+  .jv-benefit-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .jv-benefit-card {
+    padding: 20px;
+  }
+
+  .jv-why-heading {
+    margin-bottom: 30px;
+  }
+}
