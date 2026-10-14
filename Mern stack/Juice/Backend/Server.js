@@ -6,7 +6,45 @@ const db = require("./Config/Db");
 const crypto = require("crypto");
 const Order = require("./models/Order");
 const Payment = require("./models/Payment");
+const nodemailer = require("nodemailer");
 dotenv.config();
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
+
+async function sendOrderEmail(order, paymentMethod, paymentId = "") {
+  const items = (order.items || [])
+    .map(
+      (item) =>
+        `${item.name} x ${item.qty} - Rs. ${item.price}`
+    )
+    .join("\n");
+
+  return transporter.sendMail({
+    from: process.env.GMAIL_USER,
+    to: process.env.ADMIN_EMAIL,
+    subject: `New ${paymentMethod} Order - Juice Veda Corner`,
+    text: `
+New order received at Juice Veda Corner!
+
+Order ID: ${order.orderId}
+Payment Method: ${paymentMethod}
+Payment ID: ${paymentId || "Not applicable"}
+Customer: ${order.user?.name || "Not provided"}
+Phone: ${order.user?.contact || "Not provided"}
+Address: ${order.user?.address || "Not provided"}
+Total: Rs. ${(Number(order.amount || 0) / 100).toFixed(2)}
+
+Items:
+${items || "No item details available"}
+    `,
+  });
+}
 
 const app = express();
 
@@ -84,6 +122,7 @@ app.post("/create-order", async (req, res) => {
   }
 });
 
+
 app.post("/verify-payment", async (req, res) => {
   try {
     const {
@@ -92,6 +131,17 @@ app.post("/verify-payment", async (req, res) => {
       razorpay_signature,
     } = req.body;
 
+    if (
+      !razorpay_order_id ||
+      !razorpay_payment_id ||
+      !razorpay_signature
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing payment details",
+      });
+    }
+
     const body = razorpay_order_id + "|" + razorpay_payment_id;
 
     const expectedSignature = crypto
@@ -99,33 +149,75 @@ app.post("/verify-payment", async (req, res) => {
       .update(body)
       .digest("hex");
 
-    if (expectedSignature === razorpay_signature) {
+    const expected = Buffer.from(expectedSignature);
+    const received = Buffer.from(razorpay_signature);
 
-      // ✅ Save payment
-      await Payment.create({
-        paymentId: razorpay_payment_id,
-        orderId: razorpay_order_id,
-        signature: razorpay_signature,
-        status: "success",
+    if (
+      expected.length !== received.length ||
+      !crypto.timingSafeEqual(expected, received)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Payment verification failed",
       });
-
-      // ✅ Update order
-      await Order.findOneAndUpdate(
-        { orderId: razorpay_order_id },
-        { status: "paid" }
-      );
-
-      res.json({ success: true });
-
-    } else {
-      res.status(400).json({ success: false });
     }
 
+    const existingOrder = await Order.findOne({
+      orderId: razorpay_order_id,
+    });
+
+    if (!existingOrder) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    // Avoid sending another email if this order is already paid.
+    const wasAlreadyPaid = existingOrder.status === "paid";
+
+    await Payment.create({
+      paymentId: razorpay_payment_id,
+      orderId: razorpay_order_id,
+      signature: razorpay_signature,
+      status: "success",
+    });
+
+    const savedOrder = await Order.findOneAndUpdate(
+      { orderId: razorpay_order_id },
+      { status: "paid" },
+      { new: true }
+    );
+
+    // Email only after signature verification and order update.
+    if (!wasAlreadyPaid) {
+      try {
+        await sendOrderEmail(
+          savedOrder,
+          "Razorpay",
+          razorpay_payment_id
+        );
+        console.log("Razorpay order notification email sent.");
+      } catch (emailError) {
+        console.error(
+          "Razorpay notification email failed:",
+          emailError.message
+        );
+      }
+    }
+
+    return res.json({ success: true });
   } catch (err) {
-    res.status(500).send(err);
+    console.error("Payment verification error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Unable to verify payment",
+    });
   }
 });
+
 // Create Cash on Delivery order
+
 app.post("/create-cod-order", async (req, res) => {
   try {
     const { amount, items, user } = req.body;
@@ -157,19 +249,31 @@ app.post("/create-cod-order", async (req, res) => {
         address: user.address,
       },
     });
+    console.log("COD order saved. Sending email...");
+    // The order is saved. Send the notification email.
+    try {
+      await sendOrderEmail(order, "COD");
+      console.log("COD order notification email sent.");
+    } catch (emailError) {
+      console.error(
+        "COD notification email failed:",
+        emailError.message
+      );
+    }
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Cash on Delivery order placed successfully!",
       order,
     });
   } catch (err) {
     console.error("COD order error:", err);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Unable to place COD order.",
     });
   }
 });
+
 
 // Test protected route
 const authMiddleware = require("./Controller/authmiddleware/authmiddleware");
